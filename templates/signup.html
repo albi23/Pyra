@@ -1,0 +1,12 @@
+{% extends 'header.html' %}
+{% block title %} Join Pyra {% endblock %}
+
+{% block content %}
+    <h2>Sign Up</h2>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-primary">Sign Up</button>
+        <a href="/" class="btn btn-secondary">Back</a>
+    </form>
+{% endblock %}
