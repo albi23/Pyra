@@ -6,11 +6,15 @@ from django.urls import reverse_lazy
 from django.views import generic
 
 from board.forms import SignUpForm
+from .models import Board
 
 
 @login_required
 def index(request):
-    return render(request, 'index.html')
+    context = {
+        'boards': Board.objects.all()
+    }
+    return render(request, 'index.html', context)
 
 
 class SignUp(generic.CreateView):
