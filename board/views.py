@@ -17,6 +17,13 @@ def index(request):
     return render(request, 'index.html', context)
 
 
+def board(request, board_id):
+    context = {
+        'board': Board.objects.get(id=board_id)
+    }
+    return render(request, 'board.html', context)
+
+
 class SignUp(generic.CreateView):
     form_class = SignUpForm
     success_url = reverse_lazy('login')

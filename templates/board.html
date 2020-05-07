@@ -1,0 +1,12 @@
+{% extends 'header.html' %}
+
+{% block scripts %}
+{% endblock %}
+
+{% block content %}
+    {% if board %}
+        <div>
+            board name: {{ board.name }}
+        </div>
+    {% endif %}
+{% endblock %}

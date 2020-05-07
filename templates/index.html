@@ -4,25 +4,25 @@
 {% endblock %}
 
 {% block content %}
-<nav id="main-nav" class="topnavbar">
-    <a class="but-link" href="/"> PYRA </a>
+    <nav id="main-nav" class="topnavbar">
+        <a class="but-link" href="/"> PYRA </a>
 
-    <a href="accounts/logout" class="btn btn-secondary">Logout</a>
-</nav>
+        <a href="accounts/logout" class="btn btn-secondary">Logout</a>
+    </nav>
 
-<div>
-    Your boards:
-
-    {% for board in boards %}
     <div>
-        <div class="card">
-            <div class="card-body">
-                <h5 class="card-title">{{board.name}}</h5>
-                <p class="card-text">{{board.description}}</p>
-            </div>
-        </div>
+        Your boards:
+
+        {% for board in boards %}
+            <a href='board/{{ board.id }}'  >
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ board.name }}</h5>
+                        <p class="card-text">{{ board.description }}</p>
+                    </div>
+                </div>
+            </a>
+        {% endfor %}
     </div>
-    {% endfor %}
-</div>
 
 {% endblock %}
