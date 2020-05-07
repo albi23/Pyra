@@ -1,10 +1,69 @@
 {% extends 'header.html' %}
 {% block content %}
-    <form method="POST">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit" class="btn btn-primary">Sign in</button>
-        <span><a href="/signup" class="btn btn-primary">Sign Up</a></span>
-        <span><a href="/accounts/password_reset">Forgot your password?</a></span>
-    </form>
-{%  endblock %}
+    <div class="log-container">
+        <div class="d-flex justify-content-center h-100">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="d-flex justify-content-start">Sign In</h3>
+                    <div class="d-flex justify-content-end social_icon">
+                        <a href="https://www.facebook.com/"><span><i class="fab fa-facebook-square"></i></span></a>
+                        <a href="https://www.instagram.com/?hl=pl"><span><i class="fab fa-instagram"></i></span></a>
+                        <a href="https://twitter.com/explore"><span><i class="fab fa-twitter-square"></i></span></a>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <form method="POST">
+                        {% csrf_token %}
+                        <div class="input-group form-group">
+                            <div class="input-group-prepend">
+							<span class="input-group-text input-group-text-override">
+                                <i class="fas fa-user"></i>
+                            </span>
+                            </div>
+                            <input type="text" class="form-control" placeholder="username">
+                        </div>
+                        <div class="input-group form-group">
+                            <div class="input-group-prepend">
+							<span class="input-group-text input-group-text-override">
+                                <i class="fas fa-key"></i>
+                            </span>
+                            </div>
+                            <input type="password" name="password" id="inputPass" class="form-control"
+                                   placeholder="password">
+                        </div>
+                        <div class="row align-items-center remember">
+                            <input type="checkbox">Remember Me
+                        </div>
+                        <div class="form-group">
+                            <input type="submit" value="Login" class="btn float-right login_btn">
+                        </div>
+                    </form>
+                </div>
+                <div class="card-footer">
+                    <div class="d-flex justify-content-center links">
+                        Don't have an account?<a href="/signup">Sign Up</a>
+                    </div>
+                    <div class="d-flex justify-content-center">
+                        <a href="/accounts/password_reset">Forgot your password?</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {#    <div class="container">#}
+    {#        <div class="row justify-content-md-center">#}
+    {#            <div class="col col-lg-2">#}
+    {#                <form method="POST">#}
+    {#                    {% csrf_token %}#}
+    {#                    {{ form.as_p }}#}
+    {#                      <input type="password" class="form-control" name="password" id="inputPass" placeholder="Password" required>#}
+    {#  <button type="submit" class="btn btn-primary" style="opacity: 1 !important;">Sign in</button>#}
+    {#                    <button type="submit" class="btn btn-primary">Sign in</button>#}
+    {#                    <span><a href="/signup" class="btn btn-primary">Sign Up</a></span>#}
+    {#                    <span><a href="/accounts/password_reset">Forgot your password?</a></span>#}
+    {#                </form>#}
+    {#            </div>#}
+    {#        </div>#}
+    {#    </div>#}
+
+{% endblock %}
