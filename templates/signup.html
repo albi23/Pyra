@@ -1,6 +1,5 @@
 {% extends 'header.html' %}
 {% block title %} Join Pyra {% endblock %}
-
 {% block content %}
     <div class="log-container mt-5">
         <div class="col">
@@ -15,7 +14,7 @@
                             <div class="input-group form-group">
                                 <div class="input-group-sign-up">
 							        <span class="input-group-text input-group-sign-up-text-override">
-                                        <i>Username</i>
+                                        <i class="font-weight-bold">Username</i>
                                         <span class="text-danger ml-1">*</span>
                                     </span>
                                 </div>
@@ -26,7 +25,7 @@
                             <div class="input-group form-group">
                                 <div class="input-group-sign-up">
 							        <span class="input-group-text input-group-sign-up-text-override">
-                                        <i>First name</i>
+                                        <i class="font-weight-bold">First name</i>
                                     </span>
                                 </div>
                                 {{ field.errors }}
@@ -36,7 +35,7 @@
                             <div class="input-group form-group">
                                 <div class="input-group-sign-up">
 							        <span class="input-group-text input-group-sign-up-text-override">
-                                        <i>Last name</i>
+                                        <i class="font-weight-bold">Last name</i>
                                     </span>
                                 </div>
                                 {{ field.errors }}
@@ -46,7 +45,7 @@
                             <div class="input-group form-group">
                                 <div class="input-group-sign-up d-flex min-w-170">
 							        <span class="input-group-text input-group-sign-up-text-override fit-width-to-fa clear-right-radius">
-                                        <i>E-mail</i>
+                                        <i class="font-weight-bold">E-mail</i>
                                         <span class="text-danger ml-1">*</span>
                                     </span>
                                     <span class="input-group-text input-group-sign-up-text-override w-30 clear-left-radius"
@@ -60,7 +59,7 @@
                             <div class="input-group form-group">
                                 <div class="input-group-sign-up d-flex min-w-170">
 							        <span class="input-group-text input-group-sign-up-text-override fit-width-to-fa clear-right-radius">
-                                        <i>Password</i>
+                                        <i class="font-weight-bold">Password</i>
                                         <span class="text-danger ml-1">*</span>
                                     </span>
                                     <span class="input-group-text input-group-sign-up-text-override w-30 clear-left-radius"
@@ -76,7 +75,7 @@
                             <div class="input-group form-group">
                                 <div class="input-group-sign-up d-flex min-w-170">
 							        <span class="input-group-text input-group-sign-up-text-override fit-width-to-fa clear-right-radius">
-                                        <i>Confirm password</i>
+                                        <i class="font-weight-bold">Confirm password</i>
                                         <span class="text-danger ml-1">*</span>
                                     </span>
                                     <span class="input-group-text input-group-sign-up-text-override w-30 clear-left-radius"
@@ -88,6 +87,20 @@
                                        required class="form-control"
                                        placeholder="Confirm your password" id="id_password2">
                             </div>
+                            {% if form.errors %}
+                                {% for field in form %}
+                                    {% for error in field.errors %}
+                                        <div class="alert alert-danger">
+                                            <strong>{{ error|escape }}</strong>
+                                        </div>
+                                    {% endfor %}
+                                {% endfor %}
+                                {% for error in form.non_field_errors %}
+                                    <div class="alert alert-danger">
+                                        <strong>{{ error|escape }}</strong>
+                                    </div>
+                                {% endfor %}
+                            {% endif %}
                             <div class="form-group mt-4">
                                 <input type="submit" value="Sign up" class="btn float-right login_btn mr-1">
                                 <a href="/" class="btn float-right login_btn mr-1">Back</a>
@@ -98,22 +111,4 @@
             </div>
         </div>
     </div>
-
-
-
-    {% comment %}    <p>A</p>
-    <p>A</p>
-    <p>A</p>{% endcomment %}
-    <p>A</p>
-    <p>A</p>
-    <p>A</p>
-    <p>A</p>
-    <p>A</p>
-    <h2>Sign Up</h2>
-    <form method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit" class="btn btn-primary">Sign Up</button>
-        <a href="/" class="btn btn-secondary">Back</a>
-    </form>
 {% endblock %}
