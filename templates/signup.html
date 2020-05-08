@@ -1,12 +1,114 @@
 {% extends 'header.html' %}
 {% block title %} Join Pyra {% endblock %}
-
 {% block content %}
-    <h2>Sign Up</h2>
-    <form method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit" class="btn btn-primary">Sign Up</button>
-        <a href="/" class="btn btn-secondary">Back</a>
-    </form>
+    <div class="log-container mt-5">
+        <div class="col">
+            <div class="d-flex justify-content-center h-100">
+                <div class="sign-up-card">
+                    <div class="card-header">
+                        <h3 class="d-flex justify-content-start">Sign Up</h3>
+                    </div>
+                    <div class="card-body mb-5">
+                        <form method="POST">
+                            {% csrf_token %}
+                            <div class="input-group form-group">
+                                <div class="input-group-sign-up">
+							        <span class="input-group-text input-group-sign-up-text-override">
+                                        <i class="font-weight-bold">Username</i>
+                                        <span class="text-danger ml-1">*</span>
+                                    </span>
+                                </div>
+                                {{ field.errors }}
+                                <input type="text" name="username" maxlength="15" required class="form-control"
+                                       placeholder="Enter your username" id="id_username">
+                            </div>
+                            <div class="input-group form-group">
+                                <div class="input-group-sign-up">
+							        <span class="input-group-text input-group-sign-up-text-override">
+                                        <i class="font-weight-bold">First name</i>
+                                    </span>
+                                </div>
+                                {{ field.errors }}
+                                <input type="text" maxlength="30" class="form-control"
+                                       placeholder="Enter your first name" id="id_first_name">
+                            </div>
+                            <div class="input-group form-group">
+                                <div class="input-group-sign-up">
+							        <span class="input-group-text input-group-sign-up-text-override">
+                                        <i class="font-weight-bold">Last name</i>
+                                    </span>
+                                </div>
+                                {{ field.errors }}
+                                <input type="text" maxlength="30" class="form-control"
+                                       placeholder="Enter your last name" id="id_last_name">
+                            </div>
+                            <div class="input-group form-group">
+                                <div class="input-group-sign-up d-flex min-w-170">
+							        <span class="input-group-text input-group-sign-up-text-override fit-width-to-fa clear-right-radius">
+                                        <i class="font-weight-bold">E-mail</i>
+                                        <span class="text-danger ml-1">*</span>
+                                    </span>
+                                    <span class="input-group-text input-group-sign-up-text-override w-30 clear-left-radius"
+                                          style=" padding: 5px 5px !important;"><i
+                                            class="fa fa-envelope"></i></span>
+                                </div>
+                                {{ field.errors }}
+                                <input type="email" name="email" maxlength="254" required class="form-control"
+                                       placeholder="Enter your e-mail" id="id_email">
+                            </div>
+                            <div class="input-group form-group">
+                                <div class="input-group-sign-up d-flex min-w-170">
+							        <span class="input-group-text input-group-sign-up-text-override fit-width-to-fa clear-right-radius">
+                                        <i class="font-weight-bold">Password</i>
+                                        <span class="text-danger ml-1">*</span>
+                                    </span>
+                                    <span class="input-group-text input-group-sign-up-text-override w-30 clear-left-radius"
+                                          style=" padding: 5px 5px !important;"><i
+                                            class="fa fa-lock"></i></span>
+                                </div>
+                                {{ field.errors }}
+                                <input type="password" name="password1" autocomplete="new-password"
+                                       required class="form-control"
+                                       placeholder="Choose password (5-15 chars)" id="id_password1">
+                            </div>
+
+                            <div class="input-group form-group">
+                                <div class="input-group-sign-up d-flex min-w-170">
+							        <span class="input-group-text input-group-sign-up-text-override fit-width-to-fa clear-right-radius">
+                                        <i class="font-weight-bold">Confirm password</i>
+                                        <span class="text-danger ml-1">*</span>
+                                    </span>
+                                    <span class="input-group-text input-group-sign-up-text-override w-30 clear-left-radius"
+                                          style=" padding: 5px 5px !important;"><i
+                                            class="fa fa-lock"></i></span>
+                                </div>
+                                {{ field.errors }}
+                                <input type="password" name="password2" autocomplete="new-password"
+                                       required class="form-control"
+                                       placeholder="Confirm your password" id="id_password2">
+                            </div>
+                            {% if form.errors %}
+                                {% for field in form %}
+                                    {% for error in field.errors %}
+                                        <div class="alert alert-danger">
+                                            <strong>{{ error|escape }}</strong>
+                                        </div>
+                                    {% endfor %}
+                                {% endfor %}
+                                {% for error in form.non_field_errors %}
+                                    <div class="alert alert-danger">
+                                        <strong>{{ error|escape }}</strong>
+                                    </div>
+                                {% endfor %}
+                            {% endif %}
+                            <div class="form-group mt-4">
+                                <input type="submit" value="Sign up" class="btn float-right login_btn mr-1">
+                                <a href="/" class="btn float-right login_btn mr-1">Back</a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock %}

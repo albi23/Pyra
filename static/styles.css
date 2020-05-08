@@ -23,6 +23,14 @@ html, body {
     background-color: rgba(0, 0, 0, 0.5) !important;
 }
 
+.sign-up-card {
+    margin-top: auto;
+    margin-bottom: auto;
+    min-width: 600px;
+    background-color: rgba(0, 0, 0, 0.5) !important;
+}
+
+
 .social_icon span {
     font-size: 60px;
     margin-left: 10px;
@@ -51,8 +59,47 @@ html, body {
     border: 0 !important;
 }
 
+.input-group-sign-up span {
+    background-color: var(--main-logo-color);
+    color: black;
+    border: 0 !important;
+}
+
 .input-group-text-override {
     padding: .700rem .75rem !important;
+}
+
+.custom-padding-5 {
+    padding: 5px 5px !important;
+}
+
+.input-group-sign-up-text-override {
+    padding: .450rem .75rem !important;
+    margin-right: -1px;
+    min-width: 170px;
+}
+
+.fit-width-to-fa {
+    min-width: calc(100% - 25px);
+}
+
+.clear-right-radius {
+    border-bottom-right-radius: 0 !important;
+    border-top-right-radius: 0 !important;
+}
+
+.clear-left-radius {
+    border-bottom-left-radius: 0 !important;
+    border-top-left-radius: 0 !important;
+}
+
+.min-w-170 {
+    min-width: 170px;
+}
+
+.w-30 {
+    width: 100%;
+    min-width: 30px;
 }
 
 input:focus {
