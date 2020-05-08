@@ -9,7 +9,7 @@
                     <div class="card-header">
                         <h3 class="d-flex justify-content-start">Sign Up</h3>
                     </div>
-                    <div class="card-body">
+                    <div class="card-body mb-5">
                         <form method="POST">
                             {% csrf_token %}
                             <div class="input-group form-group">
@@ -20,8 +20,7 @@
                                     </span>
                                 </div>
                                 {{ field.errors }}
-                                <input type="text" name="username" autofocus="" autocapitalize="none"
-                                       autocomplete="username" maxlength="150" required="" class="form-control"
+                                <input type="text" name="username" maxlength="15" required class="form-control"
                                        placeholder="Enter your username" id="id_username">
                             </div>
                             <div class="input-group form-group">
@@ -31,9 +30,8 @@
                                     </span>
                                 </div>
                                 {{ field.errors }}
-                                <input type="text" name="username" autofocus="" autocapitalize="none"
-                                       autocomplete="username" maxlength="150" required="" class="form-control"
-                                       placeholder="Enter your first name" id="id_username">
+                                <input type="text" maxlength="30" class="form-control"
+                                       placeholder="Enter your first name" id="id_first_name">
                             </div>
                             <div class="input-group form-group">
                                 <div class="input-group-sign-up">
@@ -42,9 +40,22 @@
                                     </span>
                                 </div>
                                 {{ field.errors }}
-                                <input type="text" name="username" autofocus="" autocapitalize="none"
-                                       autocomplete="username" maxlength="150" required="" class="form-control"
-                                       placeholder="Enter your last name" id="id_username">
+                                <input type="text" maxlength="30" class="form-control"
+                                       placeholder="Enter your last name" id="id_last_name">
+                            </div>
+                            <div class="input-group form-group">
+                                <div class="input-group-sign-up d-flex min-w-170">
+							        <span class="input-group-text input-group-sign-up-text-override fit-width-to-fa clear-right-radius">
+                                        <i>E-mail</i>
+                                        <span class="text-danger ml-1">*</span>
+                                    </span>
+                                    <span class="input-group-text input-group-sign-up-text-override w-30 clear-left-radius"
+                                          style=" padding: 5px 5px !important;"><i
+                                            class="fa fa-envelope"></i></span>
+                                </div>
+                                {{ field.errors }}
+                                <input type="email" name="email" maxlength="254" required class="form-control"
+                                       placeholder="Enter your e-mail" id="id_email">
                             </div>
                             <div class="input-group form-group">
                                 <div class="input-group-sign-up d-flex min-w-170">
@@ -57,9 +68,9 @@
                                             class="fa fa-lock"></i></span>
                                 </div>
                                 {{ field.errors }}
-                                <input type="text" name="username" autofocus="" autocapitalize="none"
-                                       autocomplete="username" maxlength="150" required="" class="form-control"
-                                       placeholder="Choose password (5-15 chars)" id="id_username">
+                                <input type="password" name="password1" autocomplete="new-password"
+                                       required class="form-control"
+                                       placeholder="Choose password (5-15 chars)" id="id_password1">
                             </div>
 
                             <div class="input-group form-group">
@@ -73,12 +84,13 @@
                                             class="fa fa-lock"></i></span>
                                 </div>
                                 {{ field.errors }}
-                                <input type="text" name="username" autofocus="" autocapitalize="none"
-                                       autocomplete="username" maxlength="150" required="" class="form-control"
-                                       placeholder="Confirm your password" id="id_username">
+                                <input type="password" name="password2" autocomplete="new-password"
+                                       required class="form-control"
+                                       placeholder="Confirm your password" id="id_password2">
                             </div>
-                            <div class="form-group mb-3">
-                                <input type="submit" value="Sign up" class="btn float-right login_btn">
+                            <div class="form-group mt-4">
+                                <input type="submit" value="Sign up" class="btn float-right login_btn mr-1">
+                                <a href="/" class="btn float-right login_btn mr-1">Back</a>
                             </div>
                         </form>
                     </div>
@@ -89,9 +101,9 @@
 
 
 
+    {% comment %}    <p>A</p>
     <p>A</p>
-    <p>A</p>
-    <p>A</p>
+    <p>A</p>{% endcomment %}
     <p>A</p>
     <p>A</p>
     <p>A</p>
