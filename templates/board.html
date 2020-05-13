@@ -2,11 +2,20 @@
 
 {% block scripts %}
 {% endblock %}
-
 {% block content %}
-    {% if board %}
-        <div>
-            board name: {{ board.name }}
+    <div class="board-container">
+        <div class="lists">
+            <div class="list">
+                <div class="list-item" draggable="true">List item</div>
+                <div class="list-item" draggable="true">List item</div>
+                <div class="list-item" draggable="true">List item</div>
+            </div>
+            <div class="list">
+
+            </div>
+            <div class="list">
+
+            </div>
         </div>
-    {% endif %}
+    </div>
 {% endblock %}
