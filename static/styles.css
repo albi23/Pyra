@@ -139,6 +139,11 @@ input:focus {
 }
 
 /* Board */
+.list-title {
+    color: whitesmoke;
+    font-family: 'Consolas', 'Deja Vu Sans Mono', 'Bitstream Vera Sans Mono', monospace;
+}
+
 
 .board-container {
     display: flex;

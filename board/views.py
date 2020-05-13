@@ -7,6 +7,7 @@ from django.views import generic
 
 from board.forms import SignUpForm
 from .models import Board
+from .models import Task
 
 
 @login_required
@@ -17,10 +18,20 @@ def index(request):
     return render(request, 'index.html', context)
 
 
+@login_required
 def board(request, board_id):
+    _board = Board.objects.get(id=board_id)
+    todo_tasks = Task.objects.filter(board=_board, status='TODO')
+    doing_tasks = Task.objects.filter(board=_board, status='DOING')
+    done_tasks = Task.objects.filter(board=_board, status='DONE')
+
     context = {
-        'board': Board.objects.get(id=board_id)
+        'board': _board,
+        'todo_tasks': todo_tasks,
+        'doing_tasks': doing_tasks,
+        'done_tasks': done_tasks
     }
+
     return render(request, 'board.html', context)
 
 

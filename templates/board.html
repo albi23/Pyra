@@ -6,15 +6,22 @@
     <div class="board-container">
         <div class="lists">
             <div class="list">
-                <div class="list-item" draggable="true">List item</div>
-                <div class="list-item" draggable="true">List item</div>
-                <div class="list-item" draggable="true">List item</div>
+                <h2 class="list-title"> TODO </h2>
+                {% for task in todo_tasks %}
+                    <div class="list-item" draggable="true">{{ task.status }}</div>
+                {% endfor %}
             </div>
             <div class="list">
-
+                <h2 class="list-title"> DOING </h2>
+                {% for task in doing_tasks %}
+                    <div class="list-item" draggable="true">{{ task.status }}</div>
+                {% endfor %}
             </div>
             <div class="list">
-
+                <h2 class="list-title"> DONE </h2>
+                {% for task in done_tasks %}
+                    <div class="list-item" draggable="true">{{ task.status }}</div>
+                {% endfor %}
             </div>
         </div>
     </div>
