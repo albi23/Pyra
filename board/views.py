@@ -40,7 +40,6 @@ def board(request, board_id):
 @login_required
 @csrf_exempt
 def update_task_state(request):
-    print(10*"a")
     if request.method == "POST":
 
         body = request.body.decode('UTF-8')

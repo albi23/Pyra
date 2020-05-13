@@ -19,7 +19,6 @@ window.onload = function () {
                 draggedItem.style.display = 'block';
                 let taskId = draggedItem.getAttribute('data-internalid');
                 let newState = currStateTile.children[0].textContent;
-                draggedItem.innerHTML = newState;
                 draggedItem = null;
 
                 updateTaskState(newState, taskId);
@@ -57,8 +56,8 @@ function updateTaskState(newState, taskId) {
     $.post({
         url: '/update-task',
         data: {
-            'newState': newState.toString(),
-            'task_id': taskId.toString(),
+            'newState': newState.toString().trim(),
+            'task_id': taskId.toString().trim(),
         },
         dataType: 'json',
       });
