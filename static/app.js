@@ -2,6 +2,7 @@ window.onload = function () {
     const list_items = document.querySelectorAll('.list-item');
     const lists = document.querySelectorAll('.list');
     let draggedItem = null;
+    let currStateTile = null;
 
     for (let i = 0; i < list_items.length; i++) {
         const item = list_items[i];
@@ -16,7 +17,13 @@ window.onload = function () {
         item.addEventListener('dragend', function () {
             setTimeout(function () {
                 draggedItem.style.display = 'block';
+                let taskId = draggedItem.getAttribute('data-internalid');
+                let newState = currStateTile.children[0].textContent;
+                draggedItem.innerHTML = newState;
                 draggedItem = null;
+
+                updateTaskState(newState, taskId);
+
             }, 0);
         })
 
@@ -29,18 +36,30 @@ window.onload = function () {
 
             list.addEventListener('dragenter', function (e) {
                 e.preventDefault();
+                currStateTile = list;
                 this.style.backgroundColor = 'rgba(0, 0, 0, 0.2)';
             });
 
             list.addEventListener('dragleave', function (e) {
+                currStateTile = null;
                 this.style.backgroundColor = 'rgba(0, 0, 0, 0.1)';
             });
 
             list.addEventListener('drop', function (e) {
-                console.log('drop');
                 this.append(draggedItem);
                 this.style.backgroundColor = 'rgba(0, 0, 0, 0.1)';
             });
         }
     }
 };
+
+function updateTaskState(newState, taskId) {
+    $.post({
+        url: '/update-task',
+        data: {
+            'newState': newState.toString(),
+            'task_id': taskId.toString(),
+        },
+        dataType: 'json',
+      });
+}

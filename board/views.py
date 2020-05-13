@@ -1,9 +1,11 @@
 from django.contrib.auth.decorators import login_required
+from django.http import JsonResponse
 from django.shortcuts import render
 
 # Create your views here.
 from django.urls import reverse_lazy
 from django.views import generic
+from django.views.decorators.csrf import csrf_exempt
 
 from board.forms import SignUpForm
 from .models import Board
@@ -33,6 +35,22 @@ def board(request, board_id):
     }
 
     return render(request, 'board.html', context)
+
+
+@login_required
+@csrf_exempt
+def update_task_state(request):
+    print(10*"a")
+    if request.method == "POST":
+
+        body = request.body.decode('UTF-8')
+        task_id = body.split("&")[1].split('=')[1]
+        new_state = body.split("&")[0].split('=')[1]
+        this_task = Task.objects.get(id=task_id)
+        this_task.status = new_state
+        this_task.save()
+
+        return JsonResponse({"success": "true"})
 
 
 class SignUp(generic.CreateView):
