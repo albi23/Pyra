@@ -41,10 +41,8 @@ def board(request, board_id):
 @csrf_exempt
 def update_task_state(request):
     if request.method == "POST":
-
-        body = request.body.decode('UTF-8')
-        task_id = body.split("&")[1].split('=')[1]
-        new_state = body.split("&")[0].split('=')[1]
+        task_id = request.POST['id']
+        new_state = request.POST['state']
         this_task = Task.objects.get(id=task_id)
         this_task.status = new_state
         this_task.save()
