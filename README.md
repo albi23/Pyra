@@ -9,6 +9,11 @@ Zalecamy instalować projekt w środowisku wirtualnym.
 python3 -m pip install -r requirements.txt
 ```
 
+2. Stworzenie migracji.
+```shell script
+python3 manage.py makemigrations
+```
+
 2. Zastosowanie migracji.
 ```shell script
 python3 manage.py migrate
