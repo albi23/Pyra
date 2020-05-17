@@ -15,7 +15,7 @@ from .models import Task
 @login_required
 def index(request):
     context = {
-        'boards': Board.objects.all()
+        'boards': Board.objects.filter(members=request.user)
     }
     return render(request, 'index.html', context)
 

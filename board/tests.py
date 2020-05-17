@@ -1,17 +1,18 @@
 from django.test import TestCase, Client
 from django.contrib.auth.models import User
-from board.models import Board, Task
+from board.models import Board, Task, Membership
 
 
 class BoardTest(TestCase):
     def setUp(self) -> None:
-        self.board_name = 'test-board'
-        board = Board.objects.create(name=self.board_name, description='sfsdfwefsdfadf')
-        board.save()
-        task = Task.objects.create(title='test-task', description='fsdfadf', status='TODO', board=board)
-        task.save()
+        self.board = Board.objects.create(name='test-board', description='sfsdfwefsdfadf')
+        self.board.save()
+        self.task = Task.objects.create(title='test-task', description='fsdfadf', status='TODO', board=self.board)
+        self.task.save()
         self.user = User.objects.create_user('pat', password='haslo123')
         self.user.save()
+        self.membership = Membership.objects.create(board=self.board, user=self.user)
+        self.membership.save()
 
 
 class ModelTest(BoardTest):
@@ -26,12 +27,17 @@ class ModelTest(BoardTest):
         assert Task.objects.first().description == 'fsdfadf'
         assert Task.objects.first().status == 'TODO'
 
+    def test_membership(self):
+        assert Membership.objects.count() == 1
+        assert Board.objects.get(id=self.board.id).members.get(board__membership__user_id=self.user.id) == self.user
+        assert len(Board.objects.filter(members=self.user)) == 1
+
 
 class ViewTest(BoardTest):
     def setUp(self) -> None:
         super().setUp()
         self.client = Client()
-        self.client.login(username='pat', password='haslo123')
+        self.client.force_login(self.user)
 
     def test_updatetaskstate_view(self):
         task = Task.objects.first()
@@ -48,3 +54,14 @@ class ViewTest(BoardTest):
         assert len(response.context[0]['done_tasks']) == 0
         assert len(response.context[0]['doing_tasks']) == 0
         assert len(response.context[0]['todo_tasks']) == 1
+
+    def test_index_view(self):
+        another_board = Board.objects.create(name='another-board', description='bafafw')
+        another_board.save()
+        assert len(Board.objects.all()) > 1
+        response = self.client.get('/')
+        response_boards = response.context[0]['boards']
+        for board in response_boards:
+            assert board.members.get(board__membership__user_id=self.user.id) == self.user
+        for board in Board.objects.filter(members=self.user):
+            assert board in response_boards
