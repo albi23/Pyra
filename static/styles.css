@@ -1,5 +1,7 @@
 :root {
     --main-logo-color: #FFC312;
+    --main-border-color: #272829b0;
+    --link-override-color: #007bff
 }
 
 html, body {
@@ -8,6 +10,7 @@ html, body {
     background-repeat: no-repeat;
     height: 100%;
     font-family: 'Numans', sans-serif;
+    background-attachment: fixed;
 }
 
 .log-container {
@@ -21,6 +24,58 @@ html, body {
     margin-bottom: auto;
     width: 400px;
     background-color: rgba(0, 0, 0, 0.5) !important;
+}
+
+.table-card {
+    height: 300px;
+    margin-top: auto;
+    margin-bottom: auto;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.5) !important;
+}
+
+
+.border-decoration {
+    border: solid 2px var(--main-border-color);
+    border-radius: 5px 5px;
+}
+
+.border-bottom-decoration {
+    border-bottom: solid 2px var(--main-border-color);
+    border-radius: 5px 5px;
+}
+
+
+.a-override {
+    text-decoration: none;
+    color: var(--link-override-color);
+    pointer-events: none;
+    cursor: default;
+}
+
+.a-override:link {
+    text-decoration: none;
+    pointer-events: none;
+    cursor: default;
+}
+
+.a-override:visited {
+    text-decoration: none;
+    pointer-events: none;
+    cursor: default;
+
+}
+
+.a-override:hover {
+    text-decoration: none;
+    pointer-events: none;
+    cursor: default;
+}
+
+.a-override:active {
+    text-decoration: none;
+    pointer-events: none;
+    cursor: default;
 }
 
 .sign-up-card {
@@ -174,7 +229,7 @@ div.board-container {
     max-width: 350px;
     height: 100%;
     min-height: 150px;
-    background-color: rgba(0,0,0,0.1);
+    background-color: rgba(0, 0, 0, 0.1);
     margin: 0 15px;
     padding: 8px;
     transition: all 0.2s linear;
@@ -186,4 +241,37 @@ div.board-container {
     padding: 15px 20px;
     text-align: center;
     margin: 4px 0;
+}
+
+
+.container-override {
+    width: 100%;
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+@media (min-width: 576px) {
+    .container-override {
+        max-width: 540px;
+    }
+}
+
+@media (min-width: 768px) {
+    .container-override {
+        max-width: 720px;
+    }
+}
+
+@media (min-width: 992px) {
+    .container-override {
+        max-width: 960px;
+    }
+}
+
+@media (min-width: 1200px) {
+    .container-override {
+        max-width: 1240px;
+    }
 }

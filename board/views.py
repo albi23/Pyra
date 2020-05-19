@@ -1,7 +1,8 @@
+from typing import List
+
 from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse
 from django.shortcuts import render
-
 # Create your views here.
 from django.urls import reverse_lazy
 from django.views import generic
@@ -14,8 +15,15 @@ from .models import Task
 
 @login_required
 def index(request):
+    _all_boards = Board.objects.filter(members=request.user)
+    board_col1: List[Board] = [_all_boards[i] for i in range(0, len(_all_boards), 3)]
+    board_col2: List[Board] = [_all_boards[i] for i in range(1, len(_all_boards), 3)]
+    board_col3: List[Board] = [_all_boards[i] for i in range(2, len(_all_boards), 3)]
+
     context = {
-        'boards': Board.objects.filter(members=request.user)
+        'board_col1': board_col1,
+        'board_col2': board_col2,
+        'board_col3': board_col3,
     }
     return render(request, 'index.html', context)
 
