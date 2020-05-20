@@ -1,7 +1,9 @@
+import math
+from typing import List
+
 from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse
 from django.shortcuts import render
-
 # Create your views here.
 from django.urls import reverse_lazy
 from django.views import generic
@@ -14,10 +16,20 @@ from .models import Task
 
 @login_required
 def index(request):
+    _all_boards = Board.objects.filter(members=request.user)
+    row_count = math.ceil(len(_all_boards) / 3)
+    board_col: List[Board] = list(split(_all_boards, row_count))
+
     context = {
-        'boards': Board.objects.filter(members=request.user)
+        'board_col': board_col,
+        'row_count': row_count
     }
     return render(request, 'index.html', context)
+
+
+def split(a, n):
+    k, m = divmod(len(a), n)
+    return (a[i * k + min(i, m):(i + 1) * k + min(i + 1, m)] for i in range(n))
 
 
 @login_required
