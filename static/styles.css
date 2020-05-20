@@ -1,7 +1,10 @@
 :root {
     --main-logo-color: #FFC312;
     --main-border-color: #272829b0;
-    --link-override-color: #007bff
+    --link-override-color: #007bff;
+    --border-hide-color: #004085;
+    --background-hide-color: #061021b8;
+    --text-hide-color: #333333;
 }
 
 html, body {
@@ -66,16 +69,26 @@ html, body {
 }
 
 .hide-text {
-    position: absolute;
+    opacity: 0;
+    /*opacity: 1;*/
     top: 50%;
     left: 50%;
-    border: 2px solid chartreuse;
-    padding: 15px 15px;
     font-weight: 800;
-    background-color: blanchedalmond;
+    position: absolute;
+    padding: 15px 15px;
     text-align: center;
     font-size: x-large;
-    transform: translate(-50%, -50%);
+    text-decoration: none !important;
+    border-radius: 10px 10px;
+    border: 2px solid var(--border-hide-color);
+    background-color: var(--background-hide-color);
+    color: var(--text-hide-color) !important;
+    transform: translate(-50%, -30%);
+}
+
+.hide-text:hover {
+    opacity: 1;
+    transition: .7s ease;
 }
 
 .wrap-on-word {
