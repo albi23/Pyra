@@ -4,11 +4,28 @@
 {% endblock %}
 
 {% block content %}
-    <nav id="main-nav" class="topnavbar">
-        <a href="accounts/logout" class="btn btn-secondary">Logout</a>
+    <nav class="navbar navbar-light clear-container-margin justify-content-between main-nav">
+        <a class="navbar-brand white-text text-x-large">
+            <img src="../static/PP.ico" width="30" height="30"
+                 class="d-inline-block align-top" alt="">
+            Pyra
+        </a>
+        <div class="d-flex">
+            <div class="dropdown mr-2">
+                <a style="display: inline-block;margin-left: -130px" onclick="myFunction()" class="dropbtn">
+                    <span><i class="fa fa-plus"></i></span>
+                </a>
+                <div id="myDropdown" class="dropdown-content">
+                    <a href="#home">Create board</a>
+                    <a href="#home">Create board</a>
+                    <a href="#home">Create board</a>
+                </div>
+            </div>
+            <a href="accounts/logout" class="btn btn-outline-success btn-white my-2 my-sm-0" type="submit">Logout</a>
+        </div>
     </nav>
 
-    <div class="container-override mt-4 mb-4">
+    <div class="container-override mt-4 mb-4 ml-0">
         {% for row_arr in board_col %}
             <div class="row mt-3">
                 {% for board in row_arr %}

@@ -5,6 +5,7 @@
     --border-hide-color: #004085;
     --background-hide-color: #061021b8;
     --text-hide-color: #333333;
+    --main-nav-color: rgba(23, 7, 53, 0.88);
 }
 
 html, body {
@@ -37,11 +38,6 @@ html, body {
     background-color: rgba(0, 0, 0, 0.5) !important;
 }
 
-.table-card:hover {
-    /*opacity: 0.5;*/
-    /*transition: .7s ease;*/
-}
-
 .border-decoration {
     border: solid 2px var(--main-border-color);
     border-radius: 5px 5px;
@@ -61,16 +57,9 @@ html, body {
     cursor: default;
 }
 
-.a-override:hover {
-    /*background-color: #007bff !important;*/
-    /*color: aqua !important;*/
-    /*opacity: 0.3;*/
-    /*transition: .7s ease;*/
-}
 
 .hide-text {
     opacity: 0;
-    /*opacity: 1;*/
     top: 50%;
     left: 50%;
     font-weight: 800;
@@ -265,9 +254,85 @@ div.board-container {
     width: 100%;
     padding-right: 15px;
     padding-left: 15px;
-    margin-right: auto;
-    margin-left: auto;
+    margin-right: 4%;
+    margin-left: 4%;
 }
+
+.clear-container-margin {
+    margin-right: -5.92%;
+    margin-left: -5.9%;
+    padding-right: 15px /*!important*/;;
+    padding-left: 15px;
+}
+
+.white-text {
+    color: white !important;
+}
+
+.text-x-large {
+    font-size: x-large !important;
+}
+
+.main-nav {
+    background-color: var(--main-nav-color) !important;
+    color: white !important;
+}
+
+.btn-white {
+    border-color: white !important;
+    color: white !important;
+}
+
+.btn-white:hover {
+    border-color: white !important;
+    background-color: white !important;
+    color: black !important;
+    font-weight: 600;
+}
+
+
+.dropbtn {
+    color: white;
+    padding: .375rem .75rem;
+    font-size: 1rem;
+    border: none;
+    cursor: pointer;
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #909090;
+    min-width: 160px;
+    overflow: auto;
+    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+    z-index: 1;
+}
+
+.dropdown-content a {
+    color: white;
+    text-decoration: none;
+    padding: 12px 16px;
+    display: block;
+}
+
+.dropdown-content a:hover {
+    background-color: #333333;
+    text-decoration: none;
+    color: white;
+}
+
+
+.show {
+    display: block;
+}
+
+/**/
 
 @media (min-width: 576px) {
     .container-override {
