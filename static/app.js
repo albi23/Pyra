@@ -29,22 +29,22 @@ window.onload = function () {
         for (let j = 0; j < lists.length; j++) {
             const list = lists[j];
 
-            list.addEventListener('dragover', function (e) {
+            list.addEventListener('dragover', () => {
                 e.preventDefault();
             });
 
-            list.addEventListener('dragenter', function (e) {
+            list.addEventListener('dragenter', () => {
                 e.preventDefault();
                 currStateTile = list;
                 this.style.backgroundColor = 'rgba(0, 0, 0, 0.2)';
             });
 
-            list.addEventListener('dragleave', function (e) {
+            list.addEventListener('dragleave', () => {
                 currStateTile = null;
                 this.style.backgroundColor = 'rgba(0, 0, 0, 0.1)';
             });
 
-            list.addEventListener('drop', function (e) {
+            list.addEventListener('drop', () => {
                 this.append(draggedItem);
                 this.style.backgroundColor = 'rgba(0, 0, 0, 0.1)';
             });
@@ -60,5 +60,24 @@ function updateTaskState(newState, taskId) {
             'task_id': taskId.toString().trim(),
         },
         dataType: 'json',
-      });
+    });
+
 }
+
+function myFunction() {
+    document.getElementById("myDropdown").classList.toggle("show");
+}
+
+// Close the dropdown if the user clicks outside of it
+// window.onclick = function (event) {
+//     console.log(event.target)
+//     // if (!event.target.matches('.dropbtn')) {
+//         let dropdowns = document.getElementsByClassName("dropdown-content");
+//         let i;
+//         for (i = 0; i < dropdowns.length; i++) {
+//             let openDropdown = dropdowns[i];
+//             if (openDropdown.classList.contains('show')) {
+//                 openDropdown.classList.remove('show');
+//             }
+//         }
+// }
