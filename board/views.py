@@ -18,7 +18,7 @@ from .models import Task
 def index(request):
     _all_boards = Board.objects.filter(members=request.user)
     row_count = math.ceil(len(_all_boards) / 3)
-    board_col: List[Board] = list(split(_all_boards, row_count))
+    board_col: List[Board] = list(split(_all_boards, row_count)) if row_count > 0 else []
 
     context = {
         'board_col': board_col,
