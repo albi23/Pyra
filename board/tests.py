@@ -1,6 +1,7 @@
 from django.test import TestCase, Client
 from django.contrib.auth.models import User
 from board.models import Board, Task, Membership
+from board.const import BOARD_VIEW_COLUMN_COUNT
 
 
 class BoardTest(TestCase):
@@ -60,8 +61,7 @@ class ViewTest(BoardTest):
         another_board.save()
         assert len(Board.objects.all()) > 1
         response = self.client.get('/')
-        response_boards = response.context[0]['boards']
-        for board in response_boards:
-            assert board.members.get(board__membership__user_id=self.user.id) == self.user
-        for board in Board.objects.filter(members=self.user):
-            assert board in response_boards
+        response_boards = response.context[0]['board_col']
+        assert len(response_boards) <= BOARD_VIEW_COLUMN_COUNT, f'{len(response_boards)}'
+        assert len(max(response_boards, key=len)) == response.context[0]['row_count'], \
+            f"{len(max(response_boards, key=len))} != {response.context[0]['row_count']}"
