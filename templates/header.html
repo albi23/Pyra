@@ -25,15 +25,24 @@
     <title> {% block title %} Pyra {% endblock %}</title>
 </head>
 <body>
-<header>
-    {#    <h1 class="main-header"> PYRA </h1>#}
-</header>
+{% comment %} <header>
+    <h1 class="main-header"> PYRA </h1>
+</header> {% endcomment %}
+{% block navigation %}
+{% endblock %}
 <main class="container-override">
     {% block content %}
     {% endblock %}
 </main>
-<footer class="my-block">
-
+<footer class="main-nav">
+    <h5>Pyra 2020</h5>
+    Made by:
+    <ul>
+        <li>Patrycja Paradowska</li>
+        <li>Albert Piekielny</li>
+        <li>Jakub Dochniak</li>
+        <li>Patryk Barczak</li>
+    </ul>
 </footer>
 </body>
 </html>
