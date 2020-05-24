@@ -6,12 +6,18 @@ from board.const import BOARD_VIEW_COLUMN_COUNT
 
 class BoardTest(TestCase):
     def setUp(self) -> None:
-        self.board = Board.objects.create(name='test-board', description='sfsdfwefsdfadf')
-        self.board.save()
-        self.task = Task.objects.create(title='test-task', description='fsdfadf', status='TODO', board=self.board)
-        self.task.save()
         self.user = User.objects.create_user('pat', password='haslo123')
         self.user.save()
+        self.board = Board.objects.create(name='test-board', description='sfsdfwefsdfadf')
+        self.board.save()
+        self.task = Task.objects.create(
+            title='test-task',
+            description='fsdfadf',
+            status='TODO',
+            board=self.board,
+            created_by=self.user
+        )
+        self.task.save()
         self.membership = Membership.objects.create(board=self.board, user=self.user)
         self.membership.save()
 
