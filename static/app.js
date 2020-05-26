@@ -18,10 +18,11 @@ window.onload = function () {
             setTimeout(function () {
                 draggedItem.style.display = 'block';
                 let taskId = draggedItem.getAttribute('data-internalid');
-                let newState = currStateTile.children[0].textContent;
+                if (currStateTile && currStateTile.children[0] && currStateTile.children[0].textContent) {
+                    let newState = currStateTile.children[0].textContent;
+                    updateTaskState(newState, taskId);
+                }
                 draggedItem = null;
-
-                updateTaskState(newState, taskId);
 
             }, 0);
         })
@@ -29,22 +30,22 @@ window.onload = function () {
         for (let j = 0; j < lists.length; j++) {
             const list = lists[j];
 
-            list.addEventListener('dragover', () => {
+            list.addEventListener('dragover', function (e) {
                 e.preventDefault();
             });
 
-            list.addEventListener('dragenter', () => {
+            list.addEventListener('dragenter', function (e) {
                 e.preventDefault();
                 currStateTile = list;
                 this.style.backgroundColor = 'rgba(0, 0, 0, 0.2)';
             });
 
-            list.addEventListener('dragleave', () => {
+            list.addEventListener('dragleave', function (e) {
                 currStateTile = null;
                 this.style.backgroundColor = 'rgba(0, 0, 0, 0.1)';
             });
 
-            list.addEventListener('drop', () => {
+            list.addEventListener('drop', function (e) {
                 this.append(draggedItem);
                 this.style.backgroundColor = 'rgba(0, 0, 0, 0.1)';
             });
@@ -61,23 +62,8 @@ function updateTaskState(newState, taskId) {
         },
         dataType: 'json',
     });
-
 }
 
 function myFunction() {
     document.getElementById("myDropdown").classList.toggle("show");
 }
-
-// Close the dropdown if the user clicks outside of it
-// window.onclick = function (event) {
-//     console.log(event.target)
-//     // if (!event.target.matches('.dropbtn')) {
-//         let dropdowns = document.getElementsByClassName("dropdown-content");
-//         let i;
-//         for (i = 0; i < dropdowns.length; i++) {
-//             let openDropdown = dropdowns[i];
-//             if (openDropdown.classList.contains('show')) {
-//                 openDropdown.classList.remove('show');
-//             }
-//         }
-// }

@@ -10,16 +10,14 @@
                  class="d-inline-block align-top" alt="">
             Pyra
         </a>
-        <a class="d-flex" href="{% url 'index' %}">
-            My boards
-        </a>
+        <a class="d-flex back-board" href="{% url 'index' %}">Back to boards</a>
         <div class="d-flex">
             <div class="dropdown mr-3">
                 <a style="display: inline-block" onclick="myFunction()" class="dropbtn">
                     <span><i class="fa fa-plus"></i></span>
                 </a>
                 <div id="myDropdown" class="dropdown-content">
-                    <a href="#home">Add member</a>
+                    <a class="text-center" href="#home">Add task</a>
                 </div>
             </div>
             <a href="{% url 'logout' %}" class="btn btn-outline-success btn-white my-2 my-sm-0" type="submit">Logout</a>
