@@ -29,11 +29,11 @@ window.onload = function () {
         for (let j = 0; j < lists.length; j++) {
             const list = lists[j];
 
-            list.addEventListener('dragover', () => {
+            list.addEventListener('dragover', (e) => {
                 e.preventDefault();
             });
 
-            list.addEventListener('dragenter', () => {
+            list.addEventListener('dragenter', (e) => {
                 e.preventDefault();
                 currStateTile = list;
                 this.style.backgroundColor = 'rgba(0, 0, 0, 0.2)';
