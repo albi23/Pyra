@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse
 from django.shortcuts import render
@@ -43,13 +45,14 @@ def board(request, board_id):
 @csrf_exempt
 def update_task_state(request):
     if request.method == "POST":
-        task_id = request.POST['id']
-        new_state = request.POST['state']
+        task_id = request.POST['task_id']
+        new_state = request.POST['new_state']
         this_task = Task.objects.get(id=task_id)
         this_task.status = new_state
+        this_task.created = datetime.now() #TODO
         this_task.save()
 
-        return JsonResponse({"success": "true"})
+    return JsonResponse({"success": "true"})
 
 
 class SignUp(generic.CreateView):

@@ -56,9 +56,9 @@ window.onload = function () {
 
 function updateTaskState(newState, taskId) {
     $.post({
-        url: '/update-task',
+        url: '/update-task/',
         data: {
-            'newState': newState.toString().trim(),
+            'new_state': newState.toString().trim(),
             'task_id': taskId.toString().trim(),
         },
         dataType: 'json',
