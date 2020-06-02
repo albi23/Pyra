@@ -1,85 +1,5 @@
 [
   {
-    "model": "contenttypes.contenttype",
-    "pk": 1,
-    "fields": {
-      "app_label": "admin",
-      "model": "logentry"
-    }
-  },
-  {
-    "model": "contenttypes.contenttype",
-    "pk": 2,
-    "fields": {
-      "app_label": "auth",
-      "model": "permission"
-    }
-  },
-  {
-    "model": "contenttypes.contenttype",
-    "pk": 3,
-    "fields": {
-      "app_label": "auth",
-      "model": "group"
-    }
-  },
-  {
-    "model": "contenttypes.contenttype",
-    "pk": 4,
-    "fields": {
-      "app_label": "auth",
-      "model": "user"
-    }
-  },
-  {
-    "model": "contenttypes.contenttype",
-    "pk": 5,
-    "fields": {
-      "app_label": "contenttypes",
-      "model": "contenttype"
-    }
-  },
-  {
-    "model": "contenttypes.contenttype",
-    "pk": 6,
-    "fields": {
-      "app_label": "sessions",
-      "model": "session"
-    }
-  },
-  {
-    "model": "contenttypes.contenttype",
-    "pk": 7,
-    "fields": {
-      "app_label": "board",
-      "model": "board"
-    }
-  },
-  {
-    "model": "contenttypes.contenttype",
-    "pk": 8,
-    "fields": {
-      "app_label": "board",
-      "model": "task"
-    }
-  },
-  {
-    "model": "contenttypes.contenttype",
-    "pk": 9,
-    "fields": {
-      "app_label": "board",
-      "model": "membership"
-    }
-  },
-  {
-    "model": "contenttypes.contenttype",
-    "pk": 10,
-    "fields": {
-      "app_label": "board",
-      "model": "contribution"
-    }
-  },
-  {
     "model": "board.board",
     "pk": 1,
     "fields": {
@@ -587,7 +507,7 @@
     "model": "board.task",
     "pk": 1,
     "fields": {
-      "title": "Finish this fucking project",
+      "title": "Finish this project",
       "description": "Everything needs to be done",
       "status": "DOING",
       "priority": "NORMAL",
@@ -601,7 +521,7 @@
     "model": "board.task",
     "pk": 2,
     "fields": {
-      "title": "Finish this fucking project 1",
+      "title": "Finish this project 1",
       "description": "Everything needs to be done 1",
       "status": "TODO",
       "priority": "NORMAL",
@@ -615,7 +535,7 @@
     "model": "board.task",
     "pk": 3,
     "fields": {
-      "title": "Finish this fucking project 2",
+      "title": "Finish this project 2",
       "description": "Everything needs to be done 2",
       "status": "TODO",
       "priority": "NORMAL",
@@ -629,7 +549,7 @@
     "model": "board.task",
     "pk": 4,
     "fields": {
-      "title": "Finish this fucking project 3",
+      "title": "Finish this project 3",
       "description": "Everything needs to be done 3",
       "status": "TODO",
       "priority": "NORMAL",
@@ -643,7 +563,7 @@
     "model": "board.task",
     "pk": 5,
     "fields": {
-      "title": "Finish this fucking project 4",
+      "title": "Finish this project 4",
       "description": "Everything needs to be done 4",
       "status": "TODO",
       "priority": "NORMAL",
@@ -657,7 +577,7 @@
     "model": "board.task",
     "pk": 6,
     "fields": {
-      "title": "#2 Finish this fucking project",
+      "title": "#2 Finish this project",
       "description": "#2 Everything needs to be done",
       "status": "TODO",
       "priority": "NORMAL",
@@ -671,7 +591,7 @@
     "model": "board.task",
     "pk": 7,
     "fields": {
-      "title": "#2 Finish this fucking project 1",
+      "title": "#2 Finish this project 1",
       "description": "#2 Everything needs to be done 1",
       "status": "TODO",
       "priority": "NORMAL",
@@ -685,7 +605,7 @@
     "model": "board.task",
     "pk": 8,
     "fields": {
-      "title": "#2 Finish this fucking project 2",
+      "title": "#2 Finish this project 2",
       "description": "#2 Everything needs to be done 2",
       "status": "TODO",
       "priority": "NORMAL",
@@ -699,7 +619,7 @@
     "model": "board.task",
     "pk": 9,
     "fields": {
-      "title": "#2 Finish this fucking project 3",
+      "title": "#2 Finish this project 3",
       "description": "#2 Everything needs to be done 3",
       "status": "TODO",
       "priority": "NORMAL",
@@ -713,7 +633,7 @@
     "model": "board.task",
     "pk": 10,
     "fields": {
-      "title": "#2 Finish this fucking project 4",
+      "title": "#2 Finish this project 4",
       "description": "#2 Everything needs to be done 4",
       "status": "TODO",
       "priority": "NORMAL",
