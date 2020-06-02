@@ -7,42 +7,48 @@
     <link rel="stylesheet" href="{% static 'styles.css' %}" type="text/css"/>
     <script src="{% static 'app.js' %}"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"
             integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
             crossorigin="anonymous"></script>
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-            {% comment %}    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">{% endcomment %}
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css"
           integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Numans">
     <link rel="shortcut icon" type="image/png" href="{% static 'PP.ico' %}"/>
+    <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@600&display=swap" rel="stylesheet">
     {% block scripts %}
     {% endblock %}
     <title> {% block title %} Pyra {% endblock %}</title>
 </head>
 <body>
-{% comment %} <header>
-    <h1 class="main-header"> PYRA </h1>
-</header> {% endcomment %}
 {% block navigation %}
 {% endblock %}
-<main class="container-override">
+<main class="container-override min-h-100">
     {% block content %}
     {% endblock %}
 </main>
-<footer class="main-nav">
-    <h5>Pyra 2020</h5>
-    Made by:
-    <ul>
-        <li>Patrycja Paradowska</li>
-        <li>Albert Piekielny</li>
-        <li>Jakub Dochniak</li>
-        <li>Patryk Barczak</li>
-    </ul>
+<footer class="main-nav p-1">
+    <div class="container mb-2">
+        <div class="row justify-content-md-center comfortaa-font pt-2">
+            <h2>Pyra Copyright © 2020 </h2>
+        </div>
+        <div class="row justify-content-md-center mb-2 comfortaa-font">
+            <h3>Authors</h3>
+        </div>
+        <div class="row justify-content-md-center">
+            <div class="col col-sm-3 text-center auth-border mr-1">
+                <h5>Patrycja Paradowska</h5>
+                <h5>Albert Piekielny</h5>
+            </div>
+            <div class="col col-sm-3 text-center auth-border ml-1">
+                <h5>Jakub Dochniak</h5>
+                <h5>Patryk Barczak</h5>
+            </div>
+        </div>
+    </div>
 </footer>
 </body>
 </html>
