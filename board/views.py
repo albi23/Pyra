@@ -49,8 +49,7 @@ def update_task_state(request):
         new_state = request.POST['new_state']
         this_task = Task.objects.get(id=task_id)
         this_task.status = new_state
-        this_task.created = datetime.now() #TODO
-        this_task.save()
+        this_task.save(force_update=True)
 
     return JsonResponse({"success": "true"})
 
@@ -59,3 +58,13 @@ class SignUp(generic.CreateView):
     form_class = SignUpForm
     success_url = reverse_lazy('login')
     template_name = 'signup.html'
+
+
+@login_required
+class CreateBoard(generic.CreateView):
+    pass
+
+
+@login_required
+class CreateTask(generic.CreateView):
+    pass
