@@ -1,5 +1,3 @@
-from datetime import datetime
-
 from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse
 from django.shortcuts import render
@@ -60,11 +58,9 @@ class SignUp(generic.CreateView):
     template_name = 'signup.html'
 
 
-@login_required
 class CreateBoard(generic.CreateView):
     pass
 
 
-@login_required
 class CreateTask(generic.CreateView):
     pass

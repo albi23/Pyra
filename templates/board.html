@@ -17,12 +17,43 @@
                     <span><i class="fa fa-plus"></i></span>
                 </a>
                 <div id="myDropdown" class="dropdown-content">
-                    <a class="text-center" href="#home">Add task</a>
+                    <a class="text-center" data-toggle="modal" data-target="#task-add-modal" href="#">Add task</a>
                 </div>
             </div>
             <a href="{% url 'logout' %}" class="btn btn-outline-success btn-white my-2 my-sm-0" type="submit">Logout</a>
         </div>
     </nav>
+
+    <div class="modal fade" role="dialog" id="task-add-modal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="modal-title"> Add new task </h3>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+
+                <div class="modal-body">
+                    <form>
+                        <div class="form-group">
+                            <label for="task-title" class="col-form-label">Title:</label>
+                            <input type="text" class="form-control" id="task-title">
+                        </div>
+                        <div class="form-group">
+                            <label for="task-description" class="col-form-label">Description:</label>
+                            <input type="text" class="form-control" id="task-description">
+                        </div>
+                    </form>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-success">Create</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
 {% endblock %}
 {% block content %}
     <div class="board-container">
