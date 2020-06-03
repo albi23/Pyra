@@ -28,7 +28,7 @@ window.onload = function () {
         })
 
         for (let j = 0; j < lists.length; j++) {
-                const list = lists[j];
+            const list = lists[j];
 
             list.addEventListener('dragover', function (e) {
                 e.preventDefault();
