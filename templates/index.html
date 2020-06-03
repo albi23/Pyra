@@ -14,12 +14,45 @@
                     <span><i class="fa fa-plus"></i></span>
                 </a>
                 <div id="myDropdown" class="dropdown-content">
-                    <a class="text-center" href="#home">Create board</a>
+                     <a class="text-center" data-toggle="modal" data-target="#board-add-modal" href="#">Add board</a>
                 </div>
             </div>
             <a href="{% url 'logout' %}" class="btn btn-outline-success btn-white my-2 my-sm-0" type="submit">Logout</a>
         </div>
     </nav>
+
+    <div class="modal fade" role="dialog" id="board-add-modal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="modal-title"> Create new board </h3>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+
+                <div class="modal-body">
+                    <div class="alert alert-success" role="alert" id="board-add-success">
+                        Board added successfully!
+                    </div>
+                    <form id="new-board-form">
+                        <div class="form-group">
+                            <label for="board-name" class="col-form-label">Name:</label>
+                            <input type="text" class="form-control" id="board-name">
+                        </div>
+                        <div class="form-group">
+                            <label for="board-description" class="col-form-label">Description:</label>
+                            <input type="text" class="form-control" id="board-description">
+                        </div>
+                    </form>
+
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-success" onclick="createNewBoard()">Create</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock %}
 
 {% block content %}

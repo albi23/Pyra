@@ -7,5 +7,6 @@ urlpatterns = [
     path('board/<int:board_id>/', views.board, name='board'),
     path('signup/', views.SignUp.as_view(), name='signup'),
     path('update-task/', views.update_task_state),
-    path('create-task/', views.create_task)
+    path('create-task/', views.create_task),
+    path('create-board/', views.create_board)
 ]

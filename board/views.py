@@ -61,7 +61,16 @@ def create_task(request):
         state = request.POST['state']
         priority = request.POST['priority']
 
-        print(title)
+    return JsonResponse({"success": "true"})
+
+
+@login_required
+@csrf_exempt
+def create_board(request):
+    if request.method == "POST":
+        name = request.POST['name']
+        description = request.POST['description']
+
     return JsonResponse({"success": "true"})
 
 
