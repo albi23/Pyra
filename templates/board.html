@@ -16,7 +16,7 @@
                 <a style="display: inline-block" onclick="myFunction()" class="dropbtn">
                     <span><i class="fa fa-plus"></i></span>
                 </a>
-                <div id="myDropdown" class="dropdown-content">
+                <div id="add-task-dropdown" class="dropdown-content">
                     <a class="text-center" data-toggle="modal" data-target="#task-add-modal" href="#">Add task</a>
                 </div>
             </div>
@@ -28,14 +28,17 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h3 class="modal-title"> Add new task </h3>
+                    <h3 class="modal-title"> Create new task </h3>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
 
                 <div class="modal-body">
-                    <form>
+                    <div class="alert alert-success" role="alert" id="task-add-success">
+                        Task added successfully!
+                    </div>
+                    <form id="new-task-form">
                         <div class="form-group">
                             <label for="task-title" class="col-form-label">Title:</label>
                             <input type="text" class="form-control" id="task-title">
@@ -44,11 +47,28 @@
                             <label for="task-description" class="col-form-label">Description:</label>
                             <input type="text" class="form-control" id="task-description">
                         </div>
-                    </form>
-                </div>
 
-                <div class="modal-footer">
-                    <button type="submit" class="btn btn-success">Create</button>
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <label class="input-group-text" for="inputGroupSelect01">Status</label>
+                            </div>
+                            <label for="task-state"></label>
+                            <select class="custom-select" id="task-state">
+                                <option selected>TODO</option>
+                                <option value="2">DOING</option>
+                                <option value="3">DONE</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="formControlRange">Priority</label>
+                            <input type="range" class="form-control-range" id="task-priority">
+                        </div>
+                    </form>
+
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-success" onclick="createNewTask()">Create</button>
+                    </div>
                 </div>
             </div>
         </div>
