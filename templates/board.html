@@ -61,7 +61,31 @@
             <div class="list">
                 <h2 class="list-title"> TODO </h2>
                 {% for task in todo_tasks %}
-                    <div class="list-item" draggable="true" data-internalid={{ task.id }}>{{ task.title }}</div>
+                    <div class="list-item shadow"
+                         draggable="true"
+                         data-internalid={{ task.id }}>
+                        <div class="row">
+                            <div class="col-11 col-11-clean">{{ task.title }}</div>
+                            <div class="col-1 col-1-clean">
+                                <button class="btn btn-edit-task">
+                                    <span><i class="fa fa-pencil-alt"></i></span>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-1 col-1-clean">
+                                <div class="col-1 col-1-clean">
+                                    <button class="btn btn-edit-task">
+                                        <span><i class="fa fa-eye"></i></span>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="col-10 d-flex justify-content-end">
+                                {% comment %} for each contributors while < 5 ?{% endcomment %}
+                                <div class="test flexbox"></div>
+                            </div>
+                        </div>
+                    </div>
                 {% endfor %}
             </div>
             <div class="list">
