@@ -1,4 +1,6 @@
 window.onload = function () {
+    $('#task-add-success').hide();
+
     const list_items = document.querySelectorAll('.list-item');
     const lists = document.querySelectorAll('.list');
     let draggedItem = null;
@@ -66,5 +68,35 @@ function updateTaskState(newState, taskId) {
 }
 
 function myFunction() {
-    document.getElementById("myDropdown").classList.toggle("show");
+    document.getElementById("add-task-dropdown").classList.toggle("show");
+}
+
+function createNewTask() {
+    const title = $('#task-title').val();
+    const description = $('#task-description').val();
+    const state = $('#task-state').val();
+    const priority = $('#task-priority').val();
+
+    $.post({
+        url: '/create-task/',
+        data: {
+            'title': title,
+            'description': description,
+            'state': state,
+            'priority': priority,
+        },
+        dataType: 'json',
+        success: () => {
+            $('#task-title').val('');
+            $('#task-description').val('');
+            $('#task-state').val('');
+            $('#task-priority').val('');
+            $('#task-add-success').show();
+            setTimeout(() => {
+                $('#task-add-success').hide();
+                $('#task-add-modal').modal('hide');
+                $('#add-task-dropdown').hide();
+            }, 3000);
+        }
+    });
 }
