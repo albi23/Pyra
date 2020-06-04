@@ -80,6 +80,7 @@ def create_task(request):
         description = request.POST['description']
         state = request.POST['state']
         priority = request.POST['priority']
+        board_id = request.POST['board_id']
 
     return JsonResponse({"success": "true"})
 
