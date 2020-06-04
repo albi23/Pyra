@@ -80,7 +80,7 @@ function createNewTask() {
         data: {
             'title': title,
             'description': description,
-            'state': state,
+            'status': state,
             'priority': priority,
             'board_id': board_id,
         },
