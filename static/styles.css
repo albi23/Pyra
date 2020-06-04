@@ -8,7 +8,8 @@
     --main-nav-color: rgba(23, 7, 53, 0.88);
     --main-backfround-initials-color: #c1c1c1;
     --main-text-initial-color: #172b4d;
-    --main-btn-hover-color: #dad5d5
+    --main-btn-hover-color: #dad5d5;
+    --main-shadow-initials-color: #021325
 }
 
 html, body {
@@ -402,6 +403,12 @@ div.board-container {
     margin-top: auto;
     margin-bottom: auto;
     padding: 3px 3px;
+    min-height: 27px;
+    min-width: 27px;
+}
+
+.member:hover {
+    box-shadow: 0 0 4px 0 var(--main-shadow-initials-color);
 }
 
 .member-initials {
@@ -412,6 +419,7 @@ div.board-container {
     text-align: center;
     color: var(--main-text-initial-color);
 }
+
 
 .btn-edit-task {
     padding: 2px 5px;
