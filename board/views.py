@@ -52,6 +52,28 @@ def update_task_state(request):
     return JsonResponse({"success": "true"})
 
 
+@login_required
+@csrf_exempt
+def create_task(request):
+    if request.method == "POST":
+        title = request.POST['title']
+        description = request.POST['description']
+        state = request.POST['state']
+        priority = request.POST['priority']
+
+    return JsonResponse({"success": "true"})
+
+
+@login_required
+@csrf_exempt
+def create_board(request):
+    if request.method == "POST":
+        name = request.POST['name']
+        description = request.POST['description']
+
+    return JsonResponse({"success": "true"})
+
+
 class SignUp(generic.CreateView):
     form_class = SignUpForm
     success_url = reverse_lazy('login')

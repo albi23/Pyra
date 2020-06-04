@@ -1,4 +1,7 @@
 window.onload = function () {
+    $('#task-add-success').hide();
+    $('#board-add-success').hide();
+
     const list_items = document.querySelectorAll('.list-item');
     const lists = document.querySelectorAll('.list');
     let draggedItem = null;
@@ -67,4 +70,57 @@ function updateTaskState(newState, taskId) {
 
 function myFunction() {
     document.getElementById("myDropdown").classList.toggle("show");
+}
+
+function createNewTask() {
+    const title = $('#task-title').val();
+    const description = $('#task-description').val();
+    const state = $('#task-state').val();
+    const priority = $('#task-priority').val();
+
+    $.post({
+        url: '/create-task/',
+        data: {
+            'title': title,
+            'description': description,
+            'state': state,
+            'priority': priority,
+        },
+        dataType: 'json',
+        success: () => {
+            $('#task-title').val('');
+            $('#task-description').val('');
+            $('#task-add-success').show();
+            setTimeout(() => {
+                $('#task-add-success').hide();
+                $('#task-state').val('TODO');
+                $('#task-add-modal').modal('hide');
+                $('#myDropdown').hide();
+            }, 3000);
+        }
+    });
+}
+
+function createNewBoard() {
+    const name = $('#board-name').val();
+    const description = $('#board-description').val();
+
+    $.post({
+        url: '/create-board/',
+        data: {
+            'name': name,
+            'description': description,
+        },
+        dataType: 'json',
+        success: () => {
+            $('#board-name').val('');
+            $('#board-description').val('');
+            $('#board-add-success').show();
+            setTimeout(() => {
+                $('#board-add-success').hide();
+                $('#board-add-modal').modal('hide');
+                $('#myDropdown').hide();
+            }, 3000);
+        }
+    });
 }
