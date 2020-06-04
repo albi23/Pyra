@@ -6,6 +6,9 @@
     --background-hide-color: #061021b8;
     --text-hide-color: #333333;
     --main-nav-color: rgba(23, 7, 53, 0.88);
+    --main-backfround-initials-color: #c1c1c1;
+    --main-text-initial-color: #172b4d;
+    --main-btn-hover-color: #dad5d5
 }
 
 html, body {
@@ -372,8 +375,38 @@ div.board-container {
     display: block;
 }
 
+.btn-edit-watch-task {
+    padding: 2px 5px;
+}
+
+.btn-edit-watch-task:hover {
+    background: var(--main-btn-hover-color);
+}
+
+.member {
+    background-color: var(--main-backfround-initials-color);
+    width: fit-content;
+    height: fit-content;
+    margin-top: auto;
+    margin-bottom: auto;
+    padding: 3px 3px;
+}
+
+.member-initials {
+    display: block;
+    font-size: 12px;
+    font-weight: 700;
+    overflow: hidden;
+    text-align: center;
+    color: var(--main-text-initial-color);
+}
+
 .btn-edit-task {
     padding: 2px 5px;
+}
+
+.col-11-fit-right {
+    padding-right: 5px;
 }
 
 .col-11-clean {
@@ -385,35 +418,17 @@ div.board-container {
     padding: 0;
 }
 
-.row .btn-edit-task {
+.list-item .btn-edit-task {
     opacity: 0;
 }
 
-.row:hover .btn-edit-task {
+.list-item:hover .btn-edit-task {
     opacity: 100%;
     transition: .2s ease-in-out;
-    background: #dad5d5;
+    background: var(--main-btn-hover-color);
 }
 
-.flexbox {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-flow: column;
-}
 
-.test {
-    width: 20px;
-    height: 20px;
-    background: #dad5d5;
-    border-radius: 25px;
-    display: inline-block;
-    box-sizing: content-box;
-    text-align: center;
-    vertical-align: middle;
-    line-height: 100%;
-    margin: 0 0;
-}
 
 @media (min-width: 576px) {
     .container-override {
