@@ -72,6 +72,8 @@ function createNewTask() {
     const description = $('#task-description').val();
     const state = $('#task-state').val();
     const priority = $('#task-priority').val();
+    const url = window.location.href.split('/');
+    const board_id = url[url.length - 2];
 
     $.post({
         url: '/create-task/',
@@ -80,6 +82,7 @@ function createNewTask() {
             'description': description,
             'state': state,
             'priority': priority,
+            'board_id': board_id,
         },
         dataType: 'json',
         success: () => {
