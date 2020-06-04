@@ -5,18 +5,14 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.http import JsonResponse
 from django.shortcuts import render
-from django.http import JsonResponse, HttpResponseRedirect
-from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from django.views import generic, View
 from django.views.decorators.csrf import csrf_exempt
 
 from board.forms import SignUpForm
 from .const import BOARD_VIEW_COLUMN_COUNT
-from .models import Board
 from .models import Board, Priority, Membership
 from .models import Task
-from .const import BOARD_VIEW_COLUMN_COUNT
 
 
 @login_required
