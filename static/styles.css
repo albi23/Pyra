@@ -20,6 +20,7 @@ html, body {
 .log-container {
     height: 100%;
     align-content: center;
+    padding-top: 60px;
 }
 
 .card {
