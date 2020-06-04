@@ -1,12 +1,12 @@
 from django.contrib.auth.decorators import login_required
-from django.http import JsonResponse
-from django.shortcuts import render
+from django.http import JsonResponse, HttpResponseRedirect
+from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
-from django.views import generic
+from django.views import generic, View
 from django.views.decorators.csrf import csrf_exempt
 
 from board.forms import SignUpForm
-from .models import Board
+from .models import Board, Priority, Membership
 from .models import Task
 from .const import BOARD_VIEW_COLUMN_COUNT
 
@@ -52,38 +52,66 @@ def update_task_state(request):
     return JsonResponse({"success": "true"})
 
 
-@login_required
-@csrf_exempt
-def create_task(request):
-    if request.method == "POST":
-        title = request.POST['title']
-        description = request.POST['description']
-        state = request.POST['state']
-        priority = request.POST['priority']
-        board_id = request.POST['board_id']
-
-    return JsonResponse({"success": "true"})
-
-
-@login_required
-@csrf_exempt
-def create_board(request):
-    if request.method == "POST":
-        name = request.POST['name']
-        description = request.POST['description']
-
-    return JsonResponse({"success": "true"})
-
-
 class SignUp(generic.CreateView):
     form_class = SignUpForm
     success_url = reverse_lazy('login')
     template_name = 'signup.html'
 
 
-class CreateBoard(generic.CreateView):
-    pass
+class CreateBoard(View):
+
+    @csrf_exempt
+    def dispatch(self, request, *args, **kwargs):
+        return super().dispatch(request, *args, **kwargs)
+
+    def post(self, request):
+        name = request.POST['name']
+        description = request.POST['description']
+
+        if name:
+            new_board = Board.objects.create(
+                name=name,
+                description=description,
+            )
+            new_board.save()
+
+            creator_membership = Membership.objects.create(
+                board=new_board,
+                user=request.user,
+                role=Membership.Role.SUPER_USER
+            )
+            creator_membership.save()
+
+            return JsonResponse({"success": "true"})
+
+        return JsonResponse({"success": "false"})
 
 
-class CreateTask(generic.CreateView):
-    pass
+class CreateTask(View):
+
+    @csrf_exempt
+    def dispatch(self, request, *args, **kwargs):
+        return super().dispatch(request, *args, **kwargs)
+
+    def post(self, request):
+        title = request.POST['title']
+        description = request.POST['description']
+        status = request.POST['status']
+        priority = int(request.POST['priority'])
+        board_id = int(request.POST['board_id'])
+
+        if title and request.user in Board.objects.get(id=board_id).members.all():
+            new_task = Task.objects.create(
+                title=title,
+                description=description,
+                status=status,
+                priority=Priority.choices[-int(priority)-1][0],
+                created_by=request.user,
+                board_id=board_id
+            )
+
+            new_task.save()
+
+            return JsonResponse({"success": "true"})
+
+        return JsonResponse({"success": "false"})
