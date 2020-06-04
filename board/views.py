@@ -1,4 +1,8 @@
+from typing import List
+
+from django.contrib import auth
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
 from django.http import JsonResponse
 from django.shortcuts import render
 from django.urls import reverse_lazy
@@ -6,9 +10,9 @@ from django.views import generic
 from django.views.decorators.csrf import csrf_exempt
 
 from board.forms import SignUpForm
+from .const import BOARD_VIEW_COLUMN_COUNT
 from .models import Board
 from .models import Task
-from .const import BOARD_VIEW_COLUMN_COUNT
 
 
 @login_required
@@ -22,10 +26,26 @@ def index(request):
     return render(request, 'index.html', context)
 
 
+# extension method to User class
+def get_initials(self) -> str:
+    name: str = self.first_name
+    last_name: str = self.last_name
+
+    if name is None or len(name) < 1 \
+            or last_name is None or len(last_name) < 1:
+        user = self.username.upper()
+        return user if len(user) <= 2 else user[:2]
+
+    return (name[:1] + last_name[:1]).upper()
+
+
+auth.models.User.add_to_class('get_initials', get_initials)
+
+
 @login_required
 def board(request, board_id):
     _board = Board.objects.get(id=board_id)
-    todo_tasks = Task.objects.filter(board=_board, status='TODO')
+    todo_tasks: List[Task] = Task.objects.filter(board=_board, status='TODO')
     doing_tasks = Task.objects.filter(board=_board, status='DOING')
     done_tasks = Task.objects.filter(board=_board, status='DONE')
 

@@ -101,11 +101,11 @@
                                 </div>
                             </div>
                             <div class="col-11 col-11-fit-right d-flex justify-content-end">
-                                {% comment %} for each contributors while < 5 ?{% endcomment %}
-                                <div class="rounded-circle member">
-                                    <span class="member-initials">AP</span>
-                                </div>
-                                {#                                <div class="test flexbox"></div>#}
+                                {% for  contributors in task.contributors.all %}
+                                    <div class="rounded-circle member mr-1">
+                                        <span class="member-initials">{{ contributors.get_initials }}</span>
+                                    </div>
+                                {% endfor %}
                             </div>
                         </div>
                     </div>

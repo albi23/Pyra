@@ -30,7 +30,6 @@ class Board(models.Model):
 
 
 class Membership(models.Model):
-
     class Role(models.TextChoices):
         SUPER_USER = 'SU', gettext_lazy('Superuser')
         NORMAL = 'NO', gettext_lazy('Normal')
@@ -50,7 +49,6 @@ class Priority(models.TextChoices):
 
 
 class Task(models.Model):
-
     class TaskStatus(models.TextChoices):
         TODO = 'TODO', gettext_lazy('To Do')
         DOING = 'DOING', gettext_lazy('Doing')
@@ -67,7 +65,12 @@ class Task(models.Model):
     contributors = models.ManyToManyField(User, through='Contribution', related_name='contributor')
 
     def __str__(self):
-        return self.title
+        res: str = "title: [" + self.title + "]" + \
+                   "description:[" + self.description + "]" + \
+                   "status:[" + self.status + "]" + \
+                   "priority:[" + self.priority + "]" + \
+                   "contributors:[" + self.contributors.__str__() + "]\n"
+        return res
 
 
 class Contribution(models.Model):
