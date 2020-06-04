@@ -125,7 +125,11 @@ venv.bak/
 .dmypy.json
 dmypy.json
 
+# Not ignore under files:
+!/board/migrations/__init__.py
+
 # Pyre type checker
 .pyre/
 .idea/
 /git_move.sh
+/board/migrations/0001_initial.py

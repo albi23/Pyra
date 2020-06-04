@@ -82,19 +82,112 @@
             <div class="list">
                 <h2 class="list-title"> TODO </h2>
                 {% for task in todo_tasks %}
-                    <div class="list-item" draggable="true" data-internalid={{ task.id }}>{{ task.title }}</div>
+                    <div class="list-item shadow"
+                         draggable="true"
+                         data-internalid={{ task.id }}>
+                        <div class="row">
+                            <div class="col-11 col-11-clean">{{ task.title }}</div>
+                            <div class="col-1 col-1-clean">
+                                <button class="btn btn-edit-task">
+                                    <span><i class="fa fa-pencil-alt"></i></span>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="row mt-2">
+                            <div class="col-1 col-1-clean">
+                                <div class="col-1 col-1-clean">
+                                    <button class="btn btn-edit-watch-task">
+                                        <span><i class="fa fa-eye"></i></span>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="col-11 col-11-fit-right d-flex justify-content-end">
+                                {% for  contributors in task.contributors.all %}
+                                    <div class="rounded-circle member mr-1">
+                                        <span class="member-initials"
+                                              title="{{ contributors.username }} {{ contributors.email }}"
+                                              aria-label="{{ contributors.email }}">
+                                            {{ contributors.get_initials }}
+                                        </span>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
                 {% endfor %}
             </div>
             <div class="list">
                 <h2 class="list-title"> DOING </h2>
                 {% for task in doing_tasks %}
-                    <div class="list-item" draggable="true" data-internalid={{ task.id }}>{{ task.title }}</div>
+                    <div class="list-item shadow"
+                         draggable="true"
+                         data-internalid={{ task.id }}>
+                        <div class="row">
+                            <div class="col-11 col-11-clean">{{ task.title }}</div>
+                            <div class="col-1 col-1-clean">
+                                <button class="btn btn-edit-task">
+                                    <span><i class="fa fa-pencil-alt"></i></span>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="row mt-2">
+                            <div class="col-1 col-1-clean">
+                                <div class="col-1 col-1-clean">
+                                    <button class="btn btn-edit-watch-task">
+                                        <span><i class="fa fa-eye"></i></span>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="col-11 col-11-fit-right d-flex justify-content-end">
+                                {% for  contributors in task.contributors.all %}
+                                    <div class="rounded-circle member mr-1">
+                                        <span class="member-initials"
+                                              title="{{ contributors.username }} {{ contributors.email }}"
+                                              aria-label="{{ contributors.email }}">
+                                            {{ contributors.get_initials }}
+                                        </span>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
                 {% endfor %}
             </div>
             <div class="list">
                 <h2 class="list-title"> DONE </h2>
                 {% for task in done_tasks %}
-                    <div class="list-item" draggable="true" data-internalid={{ task.id }}>{{ task.title }}</div>
+                    <div class="list-item shadow"
+                         draggable="true"
+                         data-internalid={{ task.id }}>
+                        <div class="row">
+                            <div class="col-11 col-11-clean">{{ task.title }}</div>
+                            <div class="col-1 col-1-clean">
+                                <button class="btn btn-edit-task">
+                                    <span><i class="fa fa-pencil-alt"></i></span>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="row mt-2">
+                            <div class="col-1 col-1-clean">
+                                <div class="col-1 col-1-clean">
+                                    <button class="btn btn-edit-watch-task">
+                                        <span><i class="fa fa-eye"></i></span>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="col-11 col-11-fit-right d-flex justify-content-end">
+                                {% for  contributors in task.contributors.all %}
+                                    <div class="rounded-circle member mr-1">
+                                        <span class="member-initials"
+                                              title="{{ contributors.username }} {{ contributors.email }}"
+                                              aria-label="{{ contributors.email }}">
+                                            {{ contributors.get_initials }}
+                                        </span>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
                 {% endfor %}
             </div>
         </div>
