@@ -93,12 +93,15 @@ function createNewTask() {
             $('#task-add-success').show();
             setTimeout(() => {
                 $('#task-add-success').hide();
-                $('#task-state').val('TODO');
-                $('#task-add-modal').modal('hide');
-                $('#myDropdown').hide();
-            }, 3000);
+            }, 3000)
         }
     });
+}
+
+function closeNewTaskModal() {
+    $('#task-state').val('TODO');
+    $('#task-add-success').hide();
+    document.getElementById("myDropdown").classList.toggle("show", false);
 }
 
 function createNewBoard() {
@@ -118,9 +121,12 @@ function createNewBoard() {
             $('#board-add-success').show();
             setTimeout(() => {
                 $('#board-add-success').hide();
-                $('#board-add-modal').modal('hide');
-                $('#myDropdown').hide();
             }, 3000);
         }
     });
+}
+
+function closeNewBoardModal() {
+    $('#board-add-success').hide();
+    document.getElementById("myDropdown").classList.toggle("show", false);
 }
