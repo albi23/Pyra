@@ -21,12 +21,9 @@ window.onload = function () {
             setTimeout(function () {
                 draggedItem.style.display = 'block';
                 let taskId = draggedItem.getAttribute('data-internalid');
-                if (currStateTile && currStateTile.children[0] && currStateTile.children[0].textContent) {
-                    let newState = currStateTile.children[0].textContent;
-                    updateTaskState(newState, taskId);
-                }
+                let newState = currStateTile.children[0].textContent;
+                updateTaskState(newState, taskId);
                 draggedItem = null;
-
             }, 0);
         })
 
@@ -38,18 +35,16 @@ window.onload = function () {
             });
 
             list.addEventListener('dragenter', function (e) {
-
                 e.preventDefault();
                 currStateTile = list;
                 this.style.backgroundColor = 'rgba(0, 0, 0, 0.2)';
             });
 
-            list.addEventListener('dragleave', function (e) {
-                currStateTile = null;
+            list.addEventListener('dragleave', function () {
                 this.style.backgroundColor = 'rgba(0, 0, 0, 0.1)';
             });
 
-            list.addEventListener('drop', function (e) {
+            list.addEventListener('drop', function () {
                 this.append(draggedItem);
                 this.style.backgroundColor = 'rgba(0, 0, 0, 0.1)';
             });
