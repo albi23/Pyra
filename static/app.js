@@ -1,6 +1,8 @@
 window.onload = function () {
     $('#task-add-success').hide();
+    $('#task-add-failure').hide();
     $('#board-add-success').hide();
+    $('#board-add-failure').hide();
 
     const list_items = document.querySelectorAll('.list-item');
     const lists = document.querySelectorAll('.list');
@@ -75,6 +77,10 @@ function createNewTask() {
     const url = window.location.href.split('/');
     const board_id = url[url.length - 2];
 
+    if (!isTaskTitleValid(title) || !isTaskDescriptionValid(description)) {
+        return;
+    }
+
     $.post({
         url: '/create-task/',
         data: {
@@ -86,6 +92,7 @@ function createNewTask() {
         },
         dataType: 'json',
         success: () => {
+            $('#task-add-failure').hide();
             $('#task-title').val('');
             $('#task-description').val('');
             $('#task-add-success').show();
@@ -100,11 +107,16 @@ function closeNewTaskModal() {
     $('#task-state').val('TODO');
     $('#task-add-success').hide();
     document.getElementById("myDropdown").classList.toggle("show", false);
+    location.reload();
 }
 
 function createNewBoard() {
     const name = $('#board-name').val();
     const description = $('#board-description').val();
+
+    if (!isBoardNameValid(name) || !isBoardDescriptionValid(description)) {
+        return;
+    }
 
     $.post({
         url: '/create-board/',
@@ -114,6 +126,7 @@ function createNewBoard() {
         },
         dataType: 'json',
         success: () => {
+            $('#board-add-failure').hide();
             $('#board-name').val('');
             $('#board-description').val('');
             $('#board-add-success').show();
@@ -127,4 +140,73 @@ function createNewBoard() {
 function closeNewBoardModal() {
     $('#board-add-success').hide();
     document.getElementById("myDropdown").classList.toggle("show", false);
+    location.reload();
+}
+
+function isTaskTitleValid(title) {
+    if (!isStringLengthValid(title, 30)) {
+        displayErrorMessage('task-add-failure', 'Title too long (max 30 characters)!');
+        return false
+    }
+
+    if (!stringNotEmpty(title)) {
+        displayErrorMessage('task-add-failure', 'Title can\'t be empty!');
+        return false;
+    }
+
+    return true;
+}
+
+function isBoardNameValid(title) {
+    if (!isStringLengthValid(title, 30)) {
+        displayErrorMessage('board-add-failure', 'Name too long (max 30 characters)!');
+        return false
+    }
+
+    if (!stringNotEmpty(title)) {
+        displayErrorMessage('board-add-failure', 'Name can\'t be empty!');
+        return false;
+    }
+
+    return true;
+}
+
+function isTaskDescriptionValid(title) {
+    if (!isStringLengthValid(title, 200)) {
+        displayErrorMessage('task-add-failure', 'Description too long (max 200 characters)!');
+        return false
+    }
+    if (!stringNotEmpty(title)) {
+        displayErrorMessage('task-add-failure', 'Description can\'t be empty!');
+        return false;
+    }
+
+    return true;
+}
+
+function isBoardDescriptionValid(title) {
+    if (!isStringLengthValid(title, 200)) {
+        displayErrorMessage('board-add-failure', 'Description too long (max 200 characters)!');
+        return false
+    }
+    if (!stringNotEmpty(title)) {
+        displayErrorMessage('board-add-failure', 'Description can\'t be empty!');
+        return false;
+    }
+
+    return true;
+}
+
+function isStringLengthValid(str, len) {
+    return (str.length <= len);
+}
+
+function stringNotEmpty(str) {
+    return str.length > 0;
+}
+
+function displayErrorMessage(alertBoxId, errorMessage) {
+    const alertBox = $('#' + alertBoxId);
+    alertBox.text(errorMessage);
+    alertBox.show();
 }
