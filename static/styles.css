@@ -512,7 +512,23 @@ div.board-container {
     right: 2%;
 }
 
-#taskStatus {
+.label-down {
+    margin-top: auto;
+    margin-bottom: initial;
+}
+
+.label-bold {
+    font-size: 17px;
+    font-weight: bold;
+}
+
+.title-edit {
+    box-shadow: 0 0 4px 0 #1d1db8;
+    border-radius: 3px 3px;
+    padding: .375rem .75rem;
+}
+
+.option-bold {
     color: #021325 !important;
     font-weight: 700;
 }
@@ -530,7 +546,7 @@ div.board-container {
 }
 
 .option-green {
-    background: #6aea6a
+    background: #37bf37
 }
 
 .option-grey {

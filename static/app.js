@@ -76,7 +76,7 @@ let statusMapping = new Map();
 statusMapping.set('VH', ['#da1c2ed6', 'Very high'])
 statusMapping.set('HIGH', ['#ffa500', 'High'])
 statusMapping.set('NORMAL', ['#ffff00', 'Normal'])
-statusMapping.set('LOW', ['#6aea6a', 'Low'])
+statusMapping.set('LOW', ['#37bf37', 'Low'])
 statusMapping.set('VL', ['#808080', 'Very low'])
 
 
@@ -243,6 +243,7 @@ function loadTaskView(task) {
     this.currentUpdatedTask.last_modified = assignFormattedDate(this.currentUpdatedTask.last_modified);
     console.log(this.currentUpdatedTask)
     toggleTaskEditMode();
+    passDataIntoEditTemplate();
 }
 
 function toggleTaskEditMode() {
@@ -268,9 +269,22 @@ function updateMenuValue(id) {
 }
 
 function setTaskOptionStatus(idKey) {
-    let statusObj = document.getElementById('taskStatus');
+    assignNewPriority(idKey)
+    toggleTaskPriority()
+}
+
+function assignNewPriority(idKey) {
+    let statusObj = document.getElementById('priority-val');
     statusObj.innerText = statusMapping.get(idKey)[1];
     statusObj.style.background = statusMapping.get(idKey)[0];
-    toggleTaskPriority()
+}
+
+function passDataIntoEditTemplate() {
+    document.getElementById('title-value').value = this.currentUpdatedTask.title;
+    document.getElementById('desc-value').value = this.currentUpdatedTask.description;
+    assignNewPriority(this.currentUpdatedTask.priority)
+    document.getElementById("taskDropDown").innerText = this.currentUpdatedTask.status;
+    document.getElementById("create-val").innerText = this.currentUpdatedTask.created;
+    document.getElementById("modify-val").innerText = this.currentUpdatedTask.last_modified;
 }
 
