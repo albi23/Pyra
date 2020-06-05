@@ -72,6 +72,13 @@ class Task {
 
 // GLOBAL VARIABLE BLOCK
 let currentUpdatedTask = new Task();
+let statusMapping = new Map();
+statusMapping.set('VH', ['#da1c2ed6', 'Very high'])
+statusMapping.set('HIGH', ['#ffa500', 'High'])
+statusMapping.set('NORMAL', ['#ffff00', 'Normal'])
+statusMapping.set('LOW', ['#6aea6a', 'Low'])
+statusMapping.set('VL', ['#808080', 'Very low'])
+
 
 function updateTaskState(newState, taskId) {
     $.post({
@@ -230,16 +237,40 @@ function displayErrorMessage(alertBoxId, errorMessage) {
     alertBox.show();
 }
 
-function toggleEditMode(task) {
+function loadTaskView(task) {
     this.currentUpdatedTask = task[0]['fields'];
+    this.currentUpdatedTask.created = assignFormattedDate(this.currentUpdatedTask.created);
+    this.currentUpdatedTask.last_modified = assignFormattedDate(this.currentUpdatedTask.last_modified);
+    console.log(this.currentUpdatedTask)
+    toggleTaskEditMode();
+}
+
+function toggleTaskEditMode() {
     document.getElementById("edit-task-block").classList.toggle("hide");
 }
 
+function assignFormattedDate(data) {
+    let dataArr = data.split('T');
+    return dataArr[0].concat(' ').concat(dataArr[1].substr(0, 8))
+}
+
 function toggleTaskMenu() {
-    document.getElementById("edit-task").classList.toggle("show");
+    document.getElementById('edit-task').classList.toggle("show");
+}
+
+function toggleTaskPriority() {
+    document.getElementById('edit-priority').classList.toggle("show");
 }
 
 function updateMenuValue(id) {
     document.getElementById("taskDropDown").innerText = id.toUpperCase();
     toggleTaskMenu();
 }
+
+function setTaskOptionStatus(idKey) {
+    let statusObj = document.getElementById('taskStatus');
+    statusObj.innerText = statusMapping.get(idKey)[1];
+    statusObj.style.background = statusMapping.get(idKey)[0];
+    toggleTaskPriority()
+}
+

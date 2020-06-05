@@ -270,7 +270,7 @@ div.board-container {
 
 .under-nav-modal {
     top: 20%;
-    height: fit-content;
+    height: 60%;
 }
 
 #main-class-box {
@@ -458,7 +458,6 @@ div.board-container {
 }
 
 
-
 @media (min-width: 576px) {
     .container-override {
         max-width: 540px;
@@ -494,4 +493,46 @@ div.board-container {
 
 .hide {
     display: none;
+}
+
+.left-task-content {
+    background: #e7e8e8;
+    border-radius: 5px 5px;
+    border: 2px solid #6c757d7a;
+}
+
+.row-col-8 {
+    flex: 0 0 66.666667%;
+    max-width: 66.666667%;
+}
+
+.btn-section {
+    position: absolute;
+    bottom: 2%;
+    right: 2%;
+}
+
+#taskStatus {
+    color: #021325 !important;
+    font-weight: 700;
+}
+
+.option-red {
+    background: #da1c2ed6
+}
+
+.option-orange {
+    background: #ffa500
+}
+
+.option-yellow {
+    background: #ffff00
+}
+
+.option-green {
+    background: #6aea6a
+}
+
+.option-grey {
+    background: #808080
 }
