@@ -60,6 +60,14 @@ def board(request, board_id):
 
 
 @login_required
+def task_edit(request):
+    context = {
+        'board': "1",
+    }
+    return render(request, 'task-edit.html', context)
+
+
+@login_required
 @csrf_exempt
 def update_task_state(request):
     if request.method == "POST":
@@ -125,7 +133,7 @@ class CreateTask(View):
                 title=title,
                 description=description,
                 status=status,
-                priority=Priority.choices[-int(priority)-1][0],
+                priority=Priority.choices[-int(priority) - 1][0],
                 created_by=request.user,
                 board_id=board_id
             )

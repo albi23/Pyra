@@ -218,6 +218,10 @@ input:focus {
     display: flex;
     flex-flow: column;
     height: 80vh;
+    /*
+    min-height: 80vh;  // repair bug with amounts task, but after can not
+    height: fit-content; // change task status
+    */
 }
 
 div.board-container {
@@ -262,6 +266,10 @@ div.board-container {
     -webkit-box-shadow: 0 2px 5px 0 #ccc !important; /* Safari 3-4, iOS 4.0.2 - 4.2, Android 2.3+ */
     -moz-box-shadow: 0 2px 5px 0 #ccc !important; /* Firefox 3.5 - 3.6 */
     box-shadow: 0 2px 5px 0 #ccc !important; /* Opera 10.5, IE 9, Firefox 4+, Chrome 6+, iOS 5 */
+}
+
+.under-nav-modal {
+    top: 20%
 }
 
 #main-class-box {
