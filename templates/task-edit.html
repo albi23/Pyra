@@ -1,6 +1,42 @@
 {% load static %}
 <div class="modal fade show under-nav-modal d-flex justify-content-center">
-    <div class="col-8 d-flex justify-content-center"
-         style="height: 200px; background-color: aqua">
+    <div class="col-8 d-flex justify-content-center" style="height: 200px; background-color: aqua">
+        <div class="col-8" style="background-color: darkblue; height: 50px"></div>
+        <div class="col-4" style="background-color: firebrick; height: 50px">
+            <div class="dropdown mt-2">
+                <button class="btn btn-secondary dropdown-toggle" type="button" id="taskDropDown"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+                        onclick="toggleTaskMenu()"
+                >
+                    {#                    Current state #}
+                    Dropdown button
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" id="edit-task">
+                    <a class="dropdown-item" href="#">TODO</a>
+                    <a class="dropdown-item" href="#">DOING</a>
+                    <a class="dropdown-item" href="#">DONE</a>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
+
+<script>
+    window.onload = () => {
+        const ids = ['todo', 'doing', 'done'];
+
+        let rootMenu = document.getElementById("taskDropDown");
+        let childNodes = document.getElementById("edit-task").children;
+        for (let i = 0; i < ids.length; i++) {
+            childNodes[i].setAttribute('id', ids[i]);
+            childNodes[i].addEventListener('click', () => {
+                rootMenu.innerText = childNodes[i].id.toUpperCase();
+                toggleTaskMenu();
+            })
+        }
+    }
+
+    function toggleTaskMenu() {
+        document.getElementById("edit-task").classList.toggle("show");
+    }
+</script>

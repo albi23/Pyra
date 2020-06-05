@@ -65,7 +65,7 @@ function updateTaskState(newState, taskId) {
     });
 }
 
-function myFunction() {
+function toggleMenu() {
     document.getElementById("myDropdown").classList.toggle("show");
 }
 

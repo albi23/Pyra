@@ -269,7 +269,8 @@ div.board-container {
 }
 
 .under-nav-modal {
-    top: 20%
+    top: 20%;
+    height: fit-content;
 }
 
 #main-class-box {
@@ -480,4 +481,13 @@ div.board-container {
     .container-override {
         max-width: 1240px;
     }
+}
+
+
+#taskDropDown {
+    padding: .25rem 1.5rem;
+}
+
+.dropdown-item:hover {
+    background: #505458;
 }
