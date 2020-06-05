@@ -78,7 +78,28 @@
 
 {% endblock %}
 {% block content %}
-    {% include 'task-edit.html' %}
+    <div id="edit-task-block" class="hide">
+        <div class="modal fade show under-nav-modal d-flex justify-content-center">
+            <div class="col-8 d-flex justify-content-center" style="height: 200px; background-color: aqua">
+                <div class="col-8" style="background-color: darkblue; height: 50px"></div>
+                <div class="col-4" style="background-color: firebrick; height: 50px">
+                    <div class="dropdown mt-2">
+                        <button class="btn btn-secondary dropdown-toggle" type="button" id="taskDropDown"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+                                onclick="toggleTaskMenu()">
+                            {#                    Current state #}
+                            Dropdown button
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" id="edit-task">
+                            <a class="dropdown-item" id="todo" onclick="updateMenuValue('todo')" href="#">TODO</a>
+                            <a class="dropdown-item" id="doing" onclick="updateMenuValue('doing') " href="#">DOING</a>
+                            <a class="dropdown-item" id="done" onclick="updateMenuValue('done')" href="#">DONE</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="board-container">
         <div class="lists">
             <div class="list">
@@ -90,7 +111,7 @@
                         <div class="row">
                             <div class="col-11 col-11-clean">{{ task.title }}</div>
                             <div class="col-1 col-1-clean">
-                                <button class="btn btn-edit-task">
+                                <button class="btn btn-edit-task" onclick="toggleEditMode({{ task.to_json }})">
                                     <span><i class="fa fa-pencil-alt"></i></span>
                                 </button>
                             </div>
@@ -195,4 +216,3 @@
         </div>
     </div>
 {% endblock %}
-

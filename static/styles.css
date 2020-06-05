@@ -491,3 +491,7 @@ div.board-container {
 .dropdown-item:hover {
     background: #505458;
 }
+
+.hide {
+    display: none;
+}

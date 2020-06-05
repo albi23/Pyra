@@ -59,13 +59,6 @@ def board(request, board_id):
     return render(request, 'board.html', context)
 
 
-@login_required
-def task_edit(request):
-    context = {
-        'board': "1",
-    }
-    return render(request, 'task-edit.html', context)
-
 
 @login_required
 @csrf_exempt

@@ -54,6 +54,25 @@ window.onload = function () {
     }
 };
 
+
+// END BLOCK
+class Task {
+    constructor(title, description, status, priority,
+                board, created, last_modified, created_by) {
+        this.title = title;
+        this.description = description;
+        this.status = status;
+        this.priority = priority;
+        this.board = board;
+        this.created = created;
+        this.last_modified = last_modified;
+        this.created_by = created_by;
+    }
+}
+
+// GLOBAL VARIABLE BLOCK
+let currentUpdatedTask = new Task();
+
 function updateTaskState(newState, taskId) {
     $.post({
         url: '/update-task/',
@@ -209,4 +228,18 @@ function displayErrorMessage(alertBoxId, errorMessage) {
     const alertBox = $('#' + alertBoxId);
     alertBox.text(errorMessage);
     alertBox.show();
+}
+
+function toggleEditMode(task) {
+    this.currentUpdatedTask = task[0]['fields'];
+    document.getElementById("edit-task-block").classList.toggle("hide");
+}
+
+function toggleTaskMenu() {
+    document.getElementById("edit-task").classList.toggle("show");
+}
+
+function updateMenuValue(id) {
+    document.getElementById("taskDropDown").innerText = id.toUpperCase();
+    toggleTaskMenu();
 }
