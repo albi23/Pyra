@@ -29,7 +29,8 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h3 class="modal-title"> Create new task </h3>
-                    <button type="button" class="close" onclick="closeNewTaskModal()" data-dismiss="modal" aria-label="Close">
+                    <button type="button" class="close" onclick="closeNewTaskModal()" data-dismiss="modal"
+                            aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
@@ -76,6 +77,7 @@
 
 {% endblock %}
 {% block content %}
+    {% include 'task-edit.html' %}
     <div class="board-container">
         <div class="lists">
             <div class="list">
@@ -193,7 +195,3 @@
     </div>
 {% endblock %}
 
-{% block task-edit %}
-    {% include 'task-edit.html' %}
-
-{% endblock %}
