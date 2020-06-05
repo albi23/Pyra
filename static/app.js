@@ -54,6 +54,32 @@ window.onload = function () {
     }
 };
 
+
+// END BLOCK
+class Task {
+    constructor(title, description, status, priority,
+                board, created, last_modified, created_by) {
+        this.title = title;
+        this.description = description;
+        this.status = status;
+        this.priority = priority;
+        this.board = board;
+        this.created = created;
+        this.last_modified = last_modified;
+        this.created_by = created_by;
+    }
+}
+
+// GLOBAL VARIABLE BLOCK
+let currentUpdatedTask = new Task();
+let statusMapping = new Map();
+statusMapping.set('VH', ['#da1c2ed6', 'Very high'])
+statusMapping.set('HIGH', ['#ffa500', 'High'])
+statusMapping.set('NORMAL', ['#ffff00', 'Normal'])
+statusMapping.set('LOW', ['#37bf37', 'Low'])
+statusMapping.set('VL', ['#808080', 'Very low'])
+
+
 function updateTaskState(newState, taskId) {
     $.post({
         url: '/update-task/',
@@ -65,7 +91,7 @@ function updateTaskState(newState, taskId) {
     });
 }
 
-function myFunction() {
+function toggleMenu() {
     document.getElementById("myDropdown").classList.toggle("show");
 }
 
@@ -210,3 +236,55 @@ function displayErrorMessage(alertBoxId, errorMessage) {
     alertBox.text(errorMessage);
     alertBox.show();
 }
+
+function loadTaskView(task) {
+    this.currentUpdatedTask = task[0]['fields'];
+    this.currentUpdatedTask.created = assignFormattedDate(this.currentUpdatedTask.created);
+    this.currentUpdatedTask.last_modified = assignFormattedDate(this.currentUpdatedTask.last_modified);
+    console.log(this.currentUpdatedTask)
+    toggleTaskEditMode();
+    passDataIntoEditTemplate();
+}
+
+function toggleTaskEditMode() {
+    document.getElementById("edit-task-block").classList.toggle("hide");
+}
+
+function assignFormattedDate(data) {
+    let dataArr = data.split('T');
+    return dataArr[0].concat(' ').concat(dataArr[1].substr(0, 8))
+}
+
+function toggleTaskMenu() {
+    document.getElementById('edit-task').classList.toggle("show");
+}
+
+function toggleTaskPriority() {
+    document.getElementById('edit-priority').classList.toggle("show");
+}
+
+function updateMenuValue(id) {
+    document.getElementById("taskDropDown").innerText = id.toUpperCase();
+    toggleTaskMenu();
+}
+
+function setTaskOptionStatus(idKey) {
+    assignNewPriority(idKey)
+    toggleTaskPriority()
+}
+
+function assignNewPriority(idKey) {
+    let statusObj = document.getElementById('priority-val');
+    statusObj.innerText = statusMapping.get(idKey)[1];
+    statusObj.style.background = statusMapping.get(idKey)[0];
+}
+
+function passDataIntoEditTemplate() {
+    document.getElementById('title-value').value = this.currentUpdatedTask.title;
+    document.getElementById('desc-value').value = this.currentUpdatedTask.description;
+    assignNewPriority(this.currentUpdatedTask.priority)
+    document.getElementById("taskDropDown").innerText = this.currentUpdatedTask.status;
+    document.getElementById("create-val").innerText = this.currentUpdatedTask.created;
+    document.getElementById("modify-val").innerText = this.currentUpdatedTask.last_modified;
+}
+

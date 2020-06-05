@@ -2,6 +2,7 @@ import math
 from typing import List
 
 from django.contrib.auth.models import User
+from django.core import serializers
 from django.db import models
 from django.utils.translation import gettext_lazy
 
@@ -72,6 +73,9 @@ class Task(models.Model):
                    "contributors:[" + self.contributors.__str__() + "]\n"
         return res
 
+    def to_json(self):
+        # print("--> ",serializers.serialize('json', [self.contributors.all()]))
+        return serializers.serialize('json', [self])
 
 class Contribution(models.Model):
     task = models.ForeignKey(Task, on_delete=models.CASCADE)

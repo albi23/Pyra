@@ -218,6 +218,10 @@ input:focus {
     display: flex;
     flex-flow: column;
     height: 80vh;
+    /*
+    min-height: 80vh;  // repair bug with amounts task, but after can not
+    height: fit-content; // change task status
+    */
 }
 
 div.board-container {
@@ -262,6 +266,11 @@ div.board-container {
     -webkit-box-shadow: 0 2px 5px 0 #ccc !important; /* Safari 3-4, iOS 4.0.2 - 4.2, Android 2.3+ */
     -moz-box-shadow: 0 2px 5px 0 #ccc !important; /* Firefox 3.5 - 3.6 */
     box-shadow: 0 2px 5px 0 #ccc !important; /* Opera 10.5, IE 9, Firefox 4+, Chrome 6+, iOS 5 */
+}
+
+.under-nav-modal {
+    top: 20%;
+    height: 60%;
 }
 
 #main-class-box {
@@ -449,7 +458,6 @@ div.board-container {
 }
 
 
-
 @media (min-width: 576px) {
     .container-override {
         max-width: 540px;
@@ -472,4 +480,75 @@ div.board-container {
     .container-override {
         max-width: 1240px;
     }
+}
+
+
+#taskDropDown {
+    padding: .25rem 1.5rem;
+}
+
+.dropdown-item:hover {
+    background: #505458;
+}
+
+.hide {
+    display: none;
+}
+
+.left-task-content {
+    background: #e7e8e8;
+    border-radius: 5px 5px;
+    border: 2px solid #6c757d7a;
+}
+
+.row-col-8 {
+    flex: 0 0 66.666667%;
+    max-width: 66.666667%;
+}
+
+.btn-section {
+    position: absolute;
+    bottom: 2%;
+    right: 2%;
+}
+
+.label-down {
+    margin-top: auto;
+    margin-bottom: initial;
+}
+
+.label-bold {
+    font-size: 17px;
+    font-weight: bold;
+}
+
+.title-edit {
+    box-shadow: 0 0 4px 0 #1d1db8;
+    border-radius: 3px 3px;
+    padding: .375rem .75rem;
+}
+
+.option-bold {
+    color: #021325 !important;
+    font-weight: 700;
+}
+
+.option-red {
+    background: #da1c2ed6
+}
+
+.option-orange {
+    background: #ffa500
+}
+
+.option-yellow {
+    background: #ffff00
+}
+
+.option-green {
+    background: #37bf37
+}
+
+.option-grey {
+    background: #808080
 }

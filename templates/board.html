@@ -13,7 +13,7 @@
         <a class="d-flex back-board" href="{% url 'index' %}">Back to boards</a>
         <div class="d-flex">
             <div class="dropdown mr-3">
-                <a style="display: inline-block" onclick="myFunction()" class="dropbtn">
+                <a style="display: inline-block" onclick="toggleMenu()" class="dropbtn">
                     <span><i class="fa fa-plus"></i></span>
                 </a>
                 <div id="myDropdown" class="dropdown-content">
@@ -29,7 +29,8 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h3 class="modal-title"> Create new task </h3>
-                    <button type="button" class="close" onclick="closeNewTaskModal()" data-dismiss="modal" aria-label="Close">
+                    <button type="button" class="close" onclick="closeNewTaskModal()" data-dismiss="modal"
+                            aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
@@ -77,6 +78,94 @@
 
 {% endblock %}
 {% block content %}
+    <div id="edit-task-block" class="hide">
+        <div class="modal fade show under-nav-modal d-flex justify-content-center">
+            <div class="row row-col-8 d-flex justify-content-center left-task-content">
+                <div class="col-8" id="title">
+                    <form class="mt-2">
+                        <div class="form-group row">
+                            <div class="col">
+                                <input type="text" class="form-control-plaintext font-weight-bold title-edit"
+                                       style="font-size: x-large"
+                                       value="Title" id="title-value">
+                            </div>
+                        </div>
+                    </form>
+                    <form class="mt-3">
+                        <div class="form-group">
+                            <label for="desc-value">Description of the task</label>
+                            <textarea class="form-control" id="desc-value" rows="8"></textarea>
+                        </div>
+                    </form>
+                </div>
+                <div class="col-4">
+                    <form>
+                        <div class="form-group row">
+                            <label class="col-3 label-down label-bold">Status</label>
+                            <div class="col-9">
+                                <div class="dropdown mt-2 w-100">
+                                    <button class="btn btn-secondary dropdown-toggle w-100 text-dark" type="button"
+                                            id="taskDropDown"
+                                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+                                            onclick="toggleTaskMenu()">
+                                        TODO
+                                    </button>
+                                    <div class="dropdown-menu w-100" aria-labelledby="dropdownMenuButton"
+                                         id="edit-task">
+                                        <a class="dropdown-item" id="todo" onclick="updateMenuValue('todo')" href="#">TODO</a>
+                                        <a class="dropdown-item" id="doing" onclick="updateMenuValue('doing') "
+                                           href="#">DOING</a>
+                                        <a class="dropdown-item" id="done" onclick="updateMenuValue('done')" href="#">DONE</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-3 label-down label-bold">Priority</label>
+                            <div class="col-9">
+                                <div class="dropdown w-100">
+                                    <button class="btn btn-secondary dropdown-toggle w-100 text-dark" type="button"
+                                            id="priority-val"
+                                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+                                            onclick="toggleTaskPriority()"> Normal
+                                    </button>
+                                    <div class="dropdown-menu w-100" aria-labelledby="dropdownMenuButton"
+                                         id="edit-priority">
+                                        <a class="dropdown-item option-red" id="VH" href="#"
+                                           onclick="setTaskOptionStatus('VH')">Very high</a>
+                                        <a class="dropdown-item option-orange" id="HIGH" href="#"
+                                           onclick="setTaskOptionStatus('HIGH')">High</a>
+                                        <a class="dropdown-item option-yellow" id="NORMAL" href="#"
+                                           onclick="setTaskOptionStatus('NORMAL')">Normal</a>
+                                        <a class="dropdown-item option-green" id="LOW" href="#"
+                                           onclick="setTaskOptionStatus('LOW')">Low</a>
+                                        <a class="dropdown-item option-grey" id="VL" href="#"
+                                           onclick="setTaskOptionStatus('VL')">Very low</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-3 label-down" style="font-size: 13px">Creation Date</label>
+                            <div class="col-9 font-italic" id="create-val">
+                                2020-06-05 13:35:25
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-3 label-down" style="font-size: 13px">Last Modified</label>
+                            <div class="col-9 font-italic" id="modify-val">
+                                2020-06-05 13:35:25
+                            </div>
+                        </div>
+                    </form>
+                    <div class="btn-section">
+                        <button class="btn btn-primary">Save</button>
+                        <button class="btn btn-danger ml-1" onclick="toggleTaskEditMode()">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="board-container">
         <div class="lists">
             <div class="list">
@@ -88,7 +177,7 @@
                         <div class="row">
                             <div class="col-11 col-11-clean">{{ task.title }}</div>
                             <div class="col-1 col-1-clean">
-                                <button class="btn btn-edit-task">
+                                <button class="btn btn-edit-task" onclick="loadTaskView({{ task.to_json }})">
                                     <span><i class="fa fa-pencil-alt"></i></span>
                                 </button>
                             </div>
@@ -125,7 +214,7 @@
                         <div class="row">
                             <div class="col-11 col-11-clean">{{ task.title }}</div>
                             <div class="col-1 col-1-clean">
-                                <button class="btn btn-edit-task">
+                                <button class="btn btn-edit-task" onclick="loadTaskView({{ task.to_json }})">
                                     <span><i class="fa fa-pencil-alt"></i></span>
                                 </button>
                             </div>
@@ -162,7 +251,7 @@
                         <div class="row">
                             <div class="col-11 col-11-clean">{{ task.title }}</div>
                             <div class="col-1 col-1-clean">
-                                <button class="btn btn-edit-task">
+                                <button class="btn btn-edit-task" onclick="loadTaskView({{ task.to_json }})">
                                     <span><i class="fa fa-pencil-alt"></i></span>
                                 </button>
                             </div>
