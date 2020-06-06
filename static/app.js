@@ -57,8 +57,9 @@ window.onload = function () {
 
 // END BLOCK
 class Task {
-    constructor(title, description, status, priority,
+    constructor(id, title, description, status, priority,
                 board, created, last_modified, created_by) {
+        this.id = id;
         this.title = title;
         this.description = description;
         this.status = status;
@@ -72,12 +73,12 @@ class Task {
 
 // GLOBAL VARIABLE BLOCK
 let currentUpdatedTask = new Task();
-let statusMapping = new Map();
-statusMapping.set('VH', ['#da1c2ed6', 'Very high'])
-statusMapping.set('HIGH', ['#ffa500', 'High'])
-statusMapping.set('NORMAL', ['#ffff00', 'Normal'])
-statusMapping.set('LOW', ['#37bf37', 'Low'])
-statusMapping.set('VL', ['#808080', 'Very low'])
+let priorityMapping = new Map();
+priorityMapping.set('VH', ['#da1c2ed6', 'Very high', 4])
+priorityMapping.set('HIGH', ['#ffa500', 'High', 3])
+priorityMapping.set('NORMAL', ['#ffff00', 'Normal', 2])
+priorityMapping.set('LOW', ['#37bf37', 'Low', 1])
+priorityMapping.set('VL', ['#808080', 'Very low', 0])
 
 
 function updateTaskState(newState, taskId) {
@@ -239,9 +240,9 @@ function displayErrorMessage(alertBoxId, errorMessage) {
 
 function loadTaskView(task) {
     this.currentUpdatedTask = task[0]['fields'];
+    this.currentUpdatedTask.id = task[0]['pk'];
     this.currentUpdatedTask.created = assignFormattedDate(this.currentUpdatedTask.created);
     this.currentUpdatedTask.last_modified = assignFormattedDate(this.currentUpdatedTask.last_modified);
-    console.log(this.currentUpdatedTask)
     toggleTaskEditMode();
     passDataIntoEditTemplate();
 }
@@ -275,8 +276,8 @@ function setTaskOptionStatus(idKey) {
 
 function assignNewPriority(idKey) {
     let statusObj = document.getElementById('priority-val');
-    statusObj.innerText = statusMapping.get(idKey)[1];
-    statusObj.style.background = statusMapping.get(idKey)[0];
+    statusObj.innerText = priorityMapping.get(idKey)[1];
+    statusObj.style.background = priorityMapping.get(idKey)[0];
 }
 
 function passDataIntoEditTemplate() {
@@ -288,3 +289,23 @@ function passDataIntoEditTemplate() {
     document.getElementById("modify-val").innerText = this.currentUpdatedTask.last_modified;
 }
 
+function onSaveTask() {
+
+    $.post({
+        url: '/update-task-all/',
+        data: {
+            'id': this.currentUpdatedTask.id,
+            'title': document.getElementById('title-value').value,
+            'description': document.getElementById('desc-value').value,
+            'status': document.getElementById("taskDropDown").innerText,
+            'priority': document.getElementById('priority-val').innerText,
+        },
+        dataType: 'json',
+        success: () => {
+            toggleTaskEditMode();
+        },
+        error: () => {
+            toggleTaskEditMode();
+        }
+    });
+}

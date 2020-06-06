@@ -74,7 +74,6 @@ class Task(models.Model):
         return res
 
     def to_json(self):
-        # print("--> ",serializers.serialize('json', [self.contributors.all()]))
         return serializers.serialize('json', [self])
 
 class Contribution(models.Model):

@@ -59,7 +59,6 @@ def board(request, board_id):
     return render(request, 'board.html', context)
 
 
-
 @login_required
 @csrf_exempt
 def update_task_state(request):
@@ -136,3 +135,22 @@ class CreateTask(View):
             return JsonResponse({"success": "true"})
 
         return JsonResponse({"success": "false"})
+
+
+def parse_priority(value: str):
+    choices = Priority.choices
+    for i in range(0, len(choices)):
+        if value == choices[i][1].lower():
+            return choices[i][0]
+
+
+@login_required
+@csrf_exempt
+def update_task(request):
+    this_task = Task.objects.get(id=request.POST['id'])
+    this_task.title = request.POST['title']
+    this_task.description = request.POST['description']
+    this_task.status = request.POST['status']
+    this_task.priority = parse_priority(request.POST['priority'].lower())
+    this_task.save(force_update=True)
+    return JsonResponse({"success": "true"})
