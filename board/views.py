@@ -4,9 +4,10 @@ from django.contrib import auth
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.http import JsonResponse
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from django.views import generic, View
+from django.views.decorators.cache import never_cache
 from django.views.decorators.csrf import csrf_exempt
 
 from board.forms import SignUpForm
@@ -15,6 +16,7 @@ from .models import Board, Priority, Membership
 from .models import Task
 
 
+@never_cache
 @login_required
 def index(request):
     board_col, row_count = Board.objects.get_user_split_boards(request.user, BOARD_VIEW_COLUMN_COUNT)
@@ -137,6 +139,28 @@ class CreateTask(View):
         return JsonResponse({"success": "false"})
 
 
+class CreateMembership(View):
+
+    @csrf_exempt
+    def dispatch(self, request, *args, **kwargs):
+        return super().dispatch(request, *args, **kwargs)
+
+    def post(self, request):
+        username = request.POST['username']
+        board_id = int(request.POST['board_id'])
+
+        if username and board_id:
+            user = User.objects.filter(username=username)
+            membership = Membership.objects.create(
+                user=user,
+                board_id=board_id
+            )
+            membership.save()
+            return JsonResponse({"success": "true"})
+
+        return JsonResponse({"success": "false"})
+
+
 def parse_priority(value: str):
     choices = Priority.choices
     for i in range(0, len(choices)):
@@ -153,4 +177,20 @@ def update_task(request):
     this_task.status = request.POST['status']
     this_task.priority = parse_priority(request.POST['priority'].lower())
     this_task.save(force_update=True)
-    return JsonResponse({"success": "true"})
+
+    return redirect('board', board_id=this_task.board_id)
+
+
+@login_required
+def get_available_users(request):
+    users = User.objects.filter(
+        membership__board_id=request.GET['board']
+    ).exclude(
+        contribution__task_id=request.GET['task']
+    )
+    print(users)
+    print(type(users))
+
+    return JsonResponse({'users': users})
+
+
