@@ -95,6 +95,7 @@ function updateTaskState(newState, taskId) {
         data: {
             'new_state': newState.toString().trim(),
             'task_id': taskId.toString().trim(),
+            csrfmiddlewaretoken: $("input[name='csrfmiddlewaretoken']").val(),
         },
         dataType: 'json',
     });
@@ -124,6 +125,7 @@ function createNewTask() {
             'status': state,
             'priority': priority,
             'board_id': board_id,
+            csrfmiddlewaretoken: $("input[name='csrfmiddlewaretoken']").val(),
         },
         dataType: 'json',
         success: () => {
@@ -148,6 +150,7 @@ function closeNewTaskModal() {
 function createNewBoard() {
     const name = $('#board-name').val();
     const description = $('#board-description').val();
+    const csrfToken = $("input[name='csrfmiddlewaretoken']").val()
 
     if (!isBoardNameValid(name) || !isBoardDescriptionValid(description)) {
         return;
@@ -156,8 +159,9 @@ function createNewBoard() {
     $.post({
         url: '/create-board/',
         data: {
-            'name': name,
-            'description': description,
+            name: name,
+            description: description,
+            csrfmiddlewaretoken: csrfToken
         },
         dataType: 'json',
         success: () => {
@@ -315,6 +319,7 @@ function onSaveTask() {
             'description': document.getElementById('desc-value').value,
             'status': document.getElementById("taskDropDown").innerText,
             'priority': document.getElementById('priority-val').innerText,
+            csrfmiddlewaretoken: $("input[name='csrfmiddlewaretoken']").val(),
         },
         dataType: 'json',
         success: () => {

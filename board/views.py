@@ -7,8 +7,6 @@ from django.http import JsonResponse
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from django.views import generic, View
-from django.views.decorators.cache import never_cache
-from django.views.decorators.csrf import csrf_exempt
 
 from board.forms import SignUpForm
 from .const import BOARD_VIEW_COLUMN_COUNT
@@ -16,7 +14,6 @@ from .models import Board, Priority, Membership
 from .models import Task
 
 
-@never_cache
 @login_required
 def index(request):
     board_col, row_count = Board.objects.get_user_split_boards(request.user, BOARD_VIEW_COLUMN_COUNT)
@@ -62,7 +59,6 @@ def board(request, board_id):
 
 
 @login_required
-@csrf_exempt
 def update_task_state(request):
     if request.method == "POST":
         task_id = request.POST['task_id']
@@ -81,10 +77,6 @@ class SignUp(generic.CreateView):
 
 
 class CreateBoard(View):
-
-    @csrf_exempt
-    def dispatch(self, request, *args, **kwargs):
-        return super().dispatch(request, *args, **kwargs)
 
     def post(self, request):
         name = request.POST['name']
@@ -110,10 +102,6 @@ class CreateBoard(View):
 
 
 class CreateTask(View):
-
-    @csrf_exempt
-    def dispatch(self, request, *args, **kwargs):
-        return super().dispatch(request, *args, **kwargs)
 
     def post(self, request):
         title = request.POST['title']
@@ -141,10 +129,6 @@ class CreateTask(View):
 
 class CreateBoardMembership(View):
 
-    @csrf_exempt
-    def dispatch(self, request, *args, **kwargs):
-        return super().dispatch(request, *args, **kwargs)
-
     def post(self, request):
         username = request.POST['username']
         board_id = int(request.POST['board_id'])
@@ -169,8 +153,8 @@ def parse_priority(value: str):
 
 
 @login_required
-@csrf_exempt
 def update_task(request):
+    print(request.POST['id'])
     this_task = Task.objects.get(id=request.POST['id'])
     this_task.title = request.POST['title']
     this_task.description = request.POST['description']
@@ -199,3 +183,11 @@ def get_available_users(request):
     return JsonResponse({'users': response_users})
 
 
+@login_required
+def delete_task(request):
+    if request.method.POST['task']:
+        task = Task.objects.get(id=request.method.GET['task'])
+        if request.user in task.board.members.all():
+            task.delete()
+            return JsonResponse({"success": True})
+    return JsonResponse({"success": False})
