@@ -67,7 +67,7 @@ def update_task_state(request):
         this_task.status = new_state
         this_task.save(force_update=True)
 
-    return JsonResponse({"success": "true"})
+    return JsonResponse({"success": True})
 
 
 class SignUp(generic.CreateView):
@@ -96,9 +96,9 @@ class CreateBoard(View):
             )
             creator_membership.save()
 
-            return JsonResponse({"success": "true"})
+            return JsonResponse({"success": True})
 
-        return JsonResponse({"success": "false"})
+        return JsonResponse({"success": False})
 
 
 class CreateTask(View):
@@ -122,9 +122,9 @@ class CreateTask(View):
 
             new_task.save()
 
-            return JsonResponse({"success": "true"})
+            return JsonResponse({"success": True})
 
-        return JsonResponse({"success": "false"})
+        return JsonResponse({"success": False})
 
 
 class CreateBoardMembership(View):
@@ -140,9 +140,9 @@ class CreateBoardMembership(View):
                 board_id=board_id
             )
             membership.save()
-            return JsonResponse({"success": "true"})
+            return JsonResponse({"success": True})
 
-        return JsonResponse({"success": "false"})
+        return JsonResponse({"success": False})
 
 
 def parse_priority(value: str):
@@ -154,7 +154,6 @@ def parse_priority(value: str):
 
 @login_required
 def update_task(request):
-    print(request.POST['id'])
     this_task = Task.objects.get(id=request.POST['id'])
     this_task.title = request.POST['title']
     this_task.description = request.POST['description']
