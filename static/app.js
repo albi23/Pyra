@@ -353,11 +353,11 @@ function generateAssignedMember() {
 }
 
 function getAllUsers() {
-    const location = window.location.href.split('board/');
+    const location = window.location.href.split('/');
     $.get({
         url: '/available-users/',
         data: {
-            board: location[1].substr(0, 1),
+            board: location[location.length - 2],
             task: this.currentUpdatedTask.id
         },
         success: (data) => {
