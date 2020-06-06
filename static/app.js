@@ -327,8 +327,10 @@ function onSaveTask() {
         },
         error: () => {
             toggleTaskEditMode();
-        }
-    });
+        },
+    }).always(
+        location.reload()
+    );
 }
 
 function generateAssignedMember() {
