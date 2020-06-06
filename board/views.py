@@ -139,7 +139,7 @@ class CreateTask(View):
         return JsonResponse({"success": "false"})
 
 
-class CreateMembership(View):
+class CreateBoardMembership(View):
 
     @csrf_exempt
     def dispatch(self, request, *args, **kwargs):
@@ -150,7 +150,7 @@ class CreateMembership(View):
         board_id = int(request.POST['board_id'])
 
         if username and board_id:
-            user = User.objects.filter(username=username)
+            user = User.objects.get(username=username)
             membership = Membership.objects.create(
                 user=user,
                 board_id=board_id
@@ -188,9 +188,14 @@ def get_available_users(request):
     ).exclude(
         contribution__task_id=request.GET['task']
     )
-    print(users)
-    print(type(users))
+    response_users = list(map(
+        lambda user: {
+            'id': user.id,
+            'username': user.username
+        },
+        users
+    ))
 
-    return JsonResponse({'users': users})
+    return JsonResponse({'users': response_users})
 
 
