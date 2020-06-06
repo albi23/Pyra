@@ -55,7 +55,7 @@ window.onload = function () {
 };
 
 
-// END BLOCK
+// Class BLOCK
 class Task {
     constructor(id, title, description, status, priority,
                 board, created, last_modified, created_by) {
@@ -68,6 +68,14 @@ class Task {
         this.created = created;
         this.last_modified = last_modified;
         this.created_by = created_by;
+    }
+}
+
+class Contributors {
+    constructor(username, email, initials) {
+        this.username = username;
+        this.email = email;
+        this.initials = initials;
     }
 }
 
@@ -239,12 +247,16 @@ function displayErrorMessage(alertBoxId, errorMessage) {
 }
 
 function loadTaskView(task) {
+
     this.currentUpdatedTask = task[0]['fields'];
     this.currentUpdatedTask.id = task[0]['pk'];
+    this.contributors = task[1]['contributors']
     this.currentUpdatedTask.created = assignFormattedDate(this.currentUpdatedTask.created);
     this.currentUpdatedTask.last_modified = assignFormattedDate(this.currentUpdatedTask.last_modified);
     toggleTaskEditMode();
     passDataIntoEditTemplate();
+    generateAssignedMember();
+    getAllUsers()
 }
 
 function toggleTaskEditMode() {
@@ -262,6 +274,10 @@ function toggleTaskMenu() {
 
 function toggleTaskPriority() {
     document.getElementById('edit-priority').classList.toggle("show");
+}
+
+function toggleAssignedMember() {
+    document.getElementById('users').classList.toggle("show");
 }
 
 function updateMenuValue(id) {
@@ -308,4 +324,55 @@ function onSaveTask() {
             toggleTaskEditMode();
         }
     });
+}
+
+function generateAssignedMember() {
+    let rootElem = document.getElementById('members');
+    rootElem.innerHTML = ''; // clear nodes
+
+    if (this.contributors.length > 0) {
+        for (const contributor of this.contributors) {
+            let newDiv = document.createElement("div");
+            newDiv.classList = 'rounded-circle member mr-1'
+            let span = document.createElement("span");
+            span.classList = 'member-initials';
+            span.setAttribute('title', contributor.username + " " + contributor.email);
+            span.setAttribute('aria-label', contributor.email);
+            span.innerHTML = contributor.initials
+            newDiv.appendChild(span);
+            rootElem.appendChild(newDiv)
+        }
+    } else {
+        rootElem.innerHTML = 'Not assigned';
+    }
+}
+
+function getAllUsers() {
+    const location = window.location.href.split('board/');
+    $.get({
+        url: '/available-users/',
+        data: {
+            board: location[1].substr(0, 1),
+            task: this.currentUpdatedTask.id
+        },
+        success: (data) => {
+            fillMenuWithUsers(data['users'])
+        }
+    });
+}
+
+function fillMenuWithUsers(users) {
+    let root = document.getElementById('users');
+    root.innerText = ''
+    for (const user of users) {
+        let aTag = document.createElement("a");
+        aTag.classList = 'dropdown-item';
+        aTag.setAttribute("href", '#');
+        aTag.innerText = user.username
+        aTag.addEventListener('click', () => {
+            document.getElementById('assign-member').innerText = user.username;
+            toggleAssignedMember();
+        })
+        root.appendChild(aTag)
+    }
 }

@@ -145,15 +145,41 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="form-group row">
-                            <label class="col-3 label-down" style="font-size: 13px">Creation Date</label>
-                            <div class="col-9 font-italic" id="create-val">
+                        <div class="form-group">
+                            <div class="row"><label class="col label-down label-bold">Assign people</label></div>
+                            <div class="row">
+                                <div class="col-3 text-center"><span><i class="fa fa-user-circle fa-2x"></i></span>
+                                </div>
+                                <div class="col-9">
+                                    <div class="dropdown w-100">
+                                        <button class="btn btn-secondary dropdown-toggle w-100 text-dark" type="button"
+                                                id="assign-member"
+                                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+                                                onclick="toggleAssignedMember()">
+                                        </button>
+                                        <div class="dropdown-menu w-100" aria-labelledby="users" id="users">
+                                            <a class="dropdown-item" href="#" onclick="">nobody</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="row"><label class="col label-down label-bold">Assigned people</label></div>
+                            <div class="row">
+                                <div class="col-11 col-11-fit-right d-flex justify-content-start" id="members">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group row mb-1 mt-3">
+                            <label class="col-5 label-down pr-0" style="font-size: 13px">Creation Date</label>
+                            <div class="col-7 font-italic p-0" id="create-val">
                                 2020-06-05 13:35:25
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label class="col-3 label-down" style="font-size: 13px">Last Modified</label>
-                            <div class="col-9 font-italic" id="modify-val">
+                            <label class="col-5 label-down pr-0" style="font-size: 13px">Last Modified</label>
+                            <div class="col-7 font-italic p-0" id="modify-val">
                                 2020-06-05 13:35:25
                             </div>
                         </div>

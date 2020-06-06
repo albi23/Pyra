@@ -1,3 +1,4 @@
+import json
 import math
 from typing import List
 
@@ -74,7 +75,19 @@ class Task(models.Model):
         return res
 
     def to_json(self):
-        return serializers.serialize('json', [self])
+        contributors = list(self.contributors.all())
+        mapped_contributors = list(map(
+            lambda user: {
+                'username': user.username,
+                'email': user.email,
+                'initials': user.get_initials()
+            },
+            contributors
+        ))
+        json_contributors = json.dumps(mapped_contributors)
+        serialize: str = serializers.serialize('json', [self])
+        return serialize[:-1] + ',{\"contributors\":' + json_contributors + '}]'
+
 
 class Contribution(models.Model):
     task = models.ForeignKey(Task, on_delete=models.CASCADE)
