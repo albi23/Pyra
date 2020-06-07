@@ -314,11 +314,12 @@ function onSaveTask() {
     $.post({
         url: '/update-task-all/',
         data: {
-            'id': this.currentUpdatedTask.id,
-            'title': document.getElementById('title-value').value,
-            'description': document.getElementById('desc-value').value,
-            'status': document.getElementById("taskDropDown").innerText,
-            'priority': document.getElementById('priority-val').innerText,
+            id: this.currentUpdatedTask.id,
+            title: document.getElementById('title-value').value,
+            description: document.getElementById('desc-value').value,
+            status: document.getElementById("taskDropDown").innerText,
+            priority: document.getElementById('priority-val').innerText,
+            user: $("#assigned-member-id").val(),
             csrfmiddlewaretoken: $("input[name='csrfmiddlewaretoken']").val(),
         },
         dataType: 'json',
@@ -378,6 +379,7 @@ function fillMenuWithUsers(users) {
         aTag.innerText = user.username
         aTag.addEventListener('click', () => {
             document.getElementById('assign-member').innerText = user.username;
+            $("#assigned-member-id").val(user.id)
             toggleAssignedMember();
         })
         root.appendChild(aTag)

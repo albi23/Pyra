@@ -10,7 +10,7 @@ from django.views import generic, View
 
 from board.forms import SignUpForm
 from .const import BOARD_VIEW_COLUMN_COUNT
-from .models import Board, Priority, Membership
+from .models import Board, Priority, Membership, Contribution
 from .models import Task
 
 
@@ -65,7 +65,7 @@ def update_task_state(request):
         new_state = request.POST['new_state']
         this_task = Task.objects.get(id=task_id)
         this_task.status = new_state
-        this_task.save(force_update=True)
+        this_task.save()
 
     return JsonResponse({"success": True})
 
@@ -87,14 +87,11 @@ class CreateBoard(View):
                 name=name,
                 description=description,
             )
-            new_board.save()
-
-            creator_membership = Membership.objects.create(
+            Membership.objects.create(
                 board=new_board,
                 user=request.user,
                 role=Membership.Role.SUPER_USER
             )
-            creator_membership.save()
 
             return JsonResponse({"success": True})
 
@@ -111,7 +108,7 @@ class CreateTask(View):
         board_id = int(request.POST['board_id'])
 
         if title and request.user in Board.objects.get(id=board_id).members.all():
-            new_task = Task.objects.create(
+            Task.objects.create(
                 title=title,
                 description=description,
                 status=status,
@@ -119,8 +116,6 @@ class CreateTask(View):
                 created_by=request.user,
                 board_id=board_id
             )
-
-            new_task.save()
 
             return JsonResponse({"success": True})
 
@@ -135,11 +130,10 @@ class CreateBoardMembership(View):
 
         if username and board_id:
             user = User.objects.get(username=username)
-            membership = Membership.objects.create(
+            Membership.objects.create(
                 user=user,
                 board_id=board_id
             )
-            membership.save()
             return JsonResponse({"success": True})
 
         return JsonResponse({"success": False})
@@ -159,9 +153,16 @@ def update_task(request):
     this_task.description = request.POST['description']
     this_task.status = request.POST['status']
     this_task.priority = parse_priority(request.POST['priority'].lower())
-    this_task.save(force_update=True)
+    this_task.save()
 
-    return redirect('board', board_id=this_task.board_id)
+    assigned_user_id = request.POST['user']
+    if assigned_user_id:
+        Contribution.objects.create(
+            task=this_task,
+            user_id=assigned_user_id,
+        )
+
+    return JsonResponse({"success": True})
 
 
 @login_required
