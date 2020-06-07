@@ -93,3 +93,19 @@ class Contribution(models.Model):
     task = models.ForeignKey(Task, on_delete=models.CASCADE)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     join_date = models.DateTimeField(auto_now_add=True)
+
+
+# extension method to User class
+def get_initials(self) -> str:
+    name: str = self.first_name
+    last_name: str = self.last_name
+
+    if name is None or len(name) < 1 \
+            or last_name is None or len(last_name) < 1:
+        user = self.username.upper()
+        return user if len(user) <= 2 else user[:2]
+
+    return (name[:1] + last_name[:1]).upper()
+
+
+User.add_to_class('get_initials', get_initials)

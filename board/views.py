@@ -4,7 +4,7 @@ from django.contrib import auth
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.http import JsonResponse
-from django.shortcuts import render, redirect
+from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views import generic, View
 
@@ -23,22 +23,6 @@ def index(request):
         'row_count': row_count
     }
     return render(request, 'index.html', context)
-
-
-# extension method to User class
-def get_initials(self) -> str:
-    name: str = self.first_name
-    last_name: str = self.last_name
-
-    if name is None or len(name) < 1 \
-            or last_name is None or len(last_name) < 1:
-        user = self.username.upper()
-        return user if len(user) <= 2 else user[:2]
-
-    return (name[:1] + last_name[:1]).upper()
-
-
-auth.models.User.add_to_class('get_initials', get_initials)
 
 
 @login_required
