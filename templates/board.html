@@ -211,13 +211,13 @@
                             </div>
                         </div>
                         <div class="row mt-2">
+                        {% if user in task.contributors.all %}
                             <div class="col-1 col-1-clean">
-                                <div class="col-1 col-1-clean">
-                                    <button class="btn btn-edit-watch-task">
-                                        <span><i class="fa fa-eye"></i></span>
-                                    </button>
-                                </div>
+                                <button class="btn btn-edit-watch-task">
+                                    <span><i class="fa fa-eye"></i></span>
+                                </button>
                             </div>
+                        {% endif %}
                             <div class="col-11 col-11-fit-right d-flex justify-content-end">
                                 {% for  contributors in task.contributors.all %}
                                     <div class="rounded-circle member mr-1">
@@ -248,13 +248,13 @@
                             </div>
                         </div>
                         <div class="row mt-2">
+                        {% if user in task.contributors.all %}
                             <div class="col-1 col-1-clean">
-                                <div class="col-1 col-1-clean">
-                                    <button class="btn btn-edit-watch-task">
-                                        <span><i class="fa fa-eye"></i></span>
-                                    </button>
-                                </div>
+                                <button class="btn btn-edit-watch-task">
+                                    <span><i class="fa fa-eye"></i></span>
+                                </button>
                             </div>
+                        {% endif %}
                             <div class="col-11 col-11-fit-right d-flex justify-content-end">
                                 {% for  contributors in task.contributors.all %}
                                     <div class="rounded-circle member mr-1">
@@ -285,13 +285,13 @@
                             </div>
                         </div>
                         <div class="row mt-2">
+                        {% if user in task.contributors.all %}
                             <div class="col-1 col-1-clean">
-                                <div class="col-1 col-1-clean">
-                                    <button class="btn btn-edit-watch-task">
-                                        <span><i class="fa fa-eye"></i></span>
-                                    </button>
-                                </div>
+                                <button class="btn btn-edit-watch-task">
+                                    <span><i class="fa fa-eye"></i></span>
+                                </button>
                             </div>
+                        {% endif %}
                             <div class="col-11 col-11-fit-right d-flex justify-content-end">
                                 {% for  contributors in task.contributors.all %}
                                     <div class="rounded-circle member mr-1">

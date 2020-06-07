@@ -1,6 +1,5 @@
 from typing import List
 
-from django.contrib import auth
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.http import JsonResponse
@@ -36,7 +35,8 @@ def board(request, board_id):
         'board': _board,
         'todo_tasks': todo_tasks,
         'doing_tasks': doing_tasks,
-        'done_tasks': done_tasks
+        'done_tasks': done_tasks,
+        'user': request.user,
     }
 
     return render(request, 'board.html', context)
