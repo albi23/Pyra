@@ -113,14 +113,35 @@ class CreateBoardMembership(View):
         board_id = int(request.POST['board_id'])
 
         if username and board_id:
-            user = User.objects.get(username=username)
+            try:
+                user = User.objects.get(username=username)
+            except User.DoesNotExist:
+                return JsonResponse(
+                    status=404,
+                    data={'message': 'User doesn\'t exist'}
+                )
+
+            try:
+                membership = Membership.objects.get(board=board_id, user=user.id)
+            except Membership.DoesNotExist:
+                membership = None
+
+            if membership is not None:
+                return JsonResponse(
+                    status=400,
+                    data={'message': 'user already added'}
+                )
+
             Membership.objects.create(
                 user=user,
                 board_id=board_id
             )
-            return JsonResponse({"success": True})
+            return JsonResponse({'message': 'success'})
 
-        return JsonResponse({"success": False})
+        return JsonResponse(
+            status=400,
+            data={'message': 'username or board_id can\'t be empty'}
+        )
 
 
 def parse_priority(value: str):

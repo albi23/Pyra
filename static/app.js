@@ -3,6 +3,8 @@ window.onload = function () {
     $('#task-add-failure').hide();
     $('#board-add-success').hide();
     $('#board-add-failure').hide();
+    $('#user-invite-success').hide();
+    $('#user-invite-failure').hide();
 
     const list_items = document.querySelectorAll('.list-item');
     const lists = document.querySelectorAll('.list');
@@ -145,6 +147,54 @@ function closeNewTaskModal() {
     $('#task-add-success').hide();
     document.getElementById("myDropdown").classList.toggle("show", false);
     location.reload();
+}
+
+function inviteUser() {
+    const username = $('#username-input').val();
+    const url = window.location.href.split('/');
+    const board_id = url[url.length - 2];
+
+    $.post({
+        url: '/invite-user/',
+        data: {
+            'username': username,
+            'board_id': board_id,
+            csrfmiddlewaretoken: $("input[name='csrfmiddlewaretoken']").val(),
+        },
+        dataType: 'json',
+        success: () => {
+            $('#user-invite-failure').hide();
+            $('#username-input').val('');
+            $('#user-invite-success').show();
+            setTimeout(() => {
+                $('#user-invite-success').hide();
+            }, 3000)
+        },
+        error: (data) => {
+            const responseMessage = JSON.parse(data.responseText)['message'];
+            const failureMessageBox = $('#user-invite-failure');
+
+            switch (responseMessage) {
+                case "username or board_id can't be empty":
+                    failureMessageBox.text('Username can\'t be empty!');
+                    break;
+                case "User doesn\'t exist":
+                    failureMessageBox.text("User doesn't exist!");
+                    break;
+                case "user already added":
+                    failureMessageBox.text("This user has already been added to this board!");
+                    break;
+            }
+
+            failureMessageBox.show();
+        }
+    });
+}
+
+function closeInviteUserModal() {
+    $('#user-invite-failure').hide();
+    $('#user-invite-success').hide();
+    document.getElementById("myDropdown").classList.toggle("show", false);
 }
 
 function createNewBoard() {

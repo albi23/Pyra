@@ -18,11 +18,43 @@
                 </a>
                 <div id="myDropdown" class="dropdown-content">
                     <a class="text-center" data-toggle="modal" data-target="#task-add-modal" href="#">Add task</a>
+                    <a class="text-center" data-toggle="modal" data-target="#user-invite-modal" href="#">Invite user</a>
                 </div>
             </div>
             <a href="{% url 'logout' %}" class="btn btn-outline-success btn-white my-2 my-sm-0" type="submit">Logout</a>
         </div>
     </nav>
+
+    <div class="modal fade" role="dialog" id="user-invite-modal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="modal-title"> Invite user </h3>
+                    <button type="button" class="close" onclick="closeInviteUserModal()" data-dismiss="modal"
+                            aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+
+                <div class="modal-body">
+                    <div class="alert alert-success" role="alert" id="user-invite-success">
+                        User invited successfully!
+                    </div>
+                    <div class="alert alert-danger" role="alert" id="user-invite-failure"></div>
+                    <form id="new-task-form">
+                        <div class="form-group">
+                            <label for="username-input" class="col-form-label">Username:</label>
+                            <input type="text" class="form-control" id="username-input">
+                        </div>
+                    </form>
+
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-success" onclick="inviteUser()">Invite</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <div class="modal fade" role="dialog" id="task-add-modal">
         <div class="modal-dialog">
